@@ -30,8 +30,10 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //On App start, create a random number to display a random pokemon picture on the home screen
         var randomNr = Random.nextInt(1, 152)
 
+        //Load pokemon nr with randomNr with Picasso
         Picasso.get()
             .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$randomNr.png")
             .into(binding.pokemonHeaderImage)
@@ -47,17 +49,22 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    //MAIN CODE
+    /*
+    --> MAIN CODE
+     */
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // "Pokedex" Button - opens the full pokedex view --> PokedexFragment.kt
         binding.pokedexButton.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, PokedexFragment())
             transaction.addToBackStack(null)
             transaction.commit()
         }
+
+        //Add more buttons below...
     }
 
     override fun onDestroyView() {

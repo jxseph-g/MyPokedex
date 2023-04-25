@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ch.hslu.mobpro.mypokedex.R
 
+/*
+Main Activity replaces on creation the activity_main.xml with fragment_main.xml
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
