@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Pokemon image view -->
+    <FrameLayout
+        android:id="@+id/pokemon_image_container"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp">
+
+
+        <View
+            android:layout_width="70sp"
+            android:layout_height="25sp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="135dp"
+            android:background="@drawable/shadow"
+            android:alpha="0.7"/>
+
+        <ImageView
+            android:id="@+id/pokemon_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:background="@drawable/glumanda"/>
+
+    </FrameLayout>
+
+    <!-- Pokemon name and number layout -->
+    <LinearLayout
+        android:id="@+id/pokemon_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/pokemon_image_container"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <!-- Pokemon name text view -->
+        <TextView
+            android:id="@+id/pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="GLUMANDA"/>
+
+        <!-- Pokemon number text view -->
+        <TextView
+            android:id="@+id/pokemon_number"
+            android:text="004"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/grey"/>
+
+    </LinearLayout>
+
+    <!-- Pokemon type layout -->
+    <LinearLayout
+        android:id="@+id/pokemon_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pokemon_image_container"
+        android:layout_toRightOf="@id/pokemon_image_container"
+        android:orientation="horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp">
+
+        <!-- First Pokemon type text view -->
+        <TextView
+            android:id="@+id/pokemon_type_1"
+            android:text="fire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@color/teal"/>
+
+        <!-- Second Pokemon type text view -->
+        <TextView
+            android:id="@+id/pokemon_type_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@color/darkRed"
+            android:layout_marginLeft="8dp"/>
+
+    </LinearLayout>
+
+    <!-- Pokemon description layout -->
+    <LinearLayout
+        android:id="@+id/pokemon_description_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pokemon_type_layout"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="16dp"
+        android:background="@color/teal">
+
+        <!-- Pokemon description text view -->
+        <TextView
+            android:id="@+id/pokemon_description"
+            android:text="description of pokemon blabla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+</RelativeLayout>
