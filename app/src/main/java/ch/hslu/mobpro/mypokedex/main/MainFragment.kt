@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import ch.hslu.mobpro.mypokedex.R
+import ch.hslu.mobpro.mypokedex.databinding.FragmentMainBinding
+import ch.hslu.mobpro.mypokedex.ui.PokedexFragment
+import com.squareup.picasso.Picasso
 import kotlin.random.Random
 
 class MainFragment : Fragment() {
 
-    private var _binding: FragmentMainPokedexBinding? = null
+    private var _binding: FragmentMainBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -40,7 +43,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentMainPokedexBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 

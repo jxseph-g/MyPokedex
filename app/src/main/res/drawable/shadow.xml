@@ -1,0 +1,19 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:startColor="#72000000"
+        android:centerColor="#33000000"
+        android:endColor="#00000000"
+        android:type="radial"
+        android:gradientRadius="100dp"
+        android:centerX="50%"
+        android:centerY="100%" />
+    <size android:width="200dp" android:height="30dp" />
+    <padding android:bottom="50dp" />
+    <translate android:fromYDelta="0" android:toYDelta="50dp" />
+    <rotate
+        android:fromDegrees="45"
+        android:toDegrees="0"
+        android:pivotX="50%"
+        android:pivotY="100%" />
+</shape>
