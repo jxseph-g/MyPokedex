@@ -58,11 +58,14 @@ class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) 
                 Toast.makeText(itemView.context, "You clicked on $pokemonName", Toast.LENGTH_SHORT).show()
             }
         }
-
         fun bind(pokemon: PokeApiService.Pokemon) {
-            //get pkmn names and ids and put it with binding into recycler view
-            binding.pokemonName.text = "${pokemon.name}"
-            binding.pokedexNr.text = "${pokemon.id}"
+            val name = pokemon.name?.capitalize()
+
+            // Format the Pokedex ID with leading zeros
+            val pokedexId = pokemon.id?.toString()?.padStart(3, '0')
+
+            binding.pokemonName.text = name
+            binding.pokedexNr.text = pokedexId
             Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png")
                 .into(binding.pokemonImage)
         }

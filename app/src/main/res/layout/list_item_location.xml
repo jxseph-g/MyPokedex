@@ -17,8 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         tools:text="Indigo Plateau"
         android:textColor="@android:color/white"
         android:textSize="35sp" />
+
 
 </RelativeLayout>
