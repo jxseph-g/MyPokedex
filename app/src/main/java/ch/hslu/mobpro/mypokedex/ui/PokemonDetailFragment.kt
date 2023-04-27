@@ -25,12 +25,6 @@ class PokemonDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        // Load the Pokemon image using Picasso
-        // Use the Pokemon ID instead of the hardcoded value for the actual implementation
-        val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-        Picasso.get().load(imageUrl).into(binding.pokemonImage)
     }
 
     override fun onDestroyView() {
