@@ -64,6 +64,14 @@ class MainFragment : Fragment() {
             transaction.commit()
         }
 
+        //"All Locations" Button - opens all the locations --> CityFragment
+        binding.locationsButton.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, LocationsFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         //Add more buttons below...
     }
 

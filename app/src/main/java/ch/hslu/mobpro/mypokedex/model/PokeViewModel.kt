@@ -1,9 +1,9 @@
 package ch.hslu.mobpro.mypokedex.model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.hslu.mobpro.mypokedex.network.PokeApiService
-import ch.hslu.mobpro.mypokedex.network.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,10 +37,19 @@ class PokeViewModel : ViewModel() {
 
     //Pokemon List GEN 1
     //_pokeFlow is a private MutableStateFlow object that holds the list of Pokemon objects
-    private val _pokeFlow: MutableStateFlow<List<Pokemon>> = MutableStateFlow(emptyList())
+    private val _pokeFlow: MutableStateFlow<List<PokeApiService.Pokemon>> =
+        MutableStateFlow(emptyList())
 
     //pokeFlow: A public read-only Flow object that exposes the list of Pokemon objects to the UI components.
-    val pokeFlow: Flow<List<Pokemon>> = _pokeFlow
+    val pokeFlow: Flow<List<PokeApiService.Pokemon>> = _pokeFlow
+
+    //Location List GEN 1
+//_locationFlow is a private MutableStateFlow object that holds the list of Location objects
+    private val _locationFlow: MutableStateFlow<List<PokeApiService.Location>> =
+        MutableStateFlow(emptyList())
+
+    //locationFlow: A public read-only Flow object that exposes the list of Location objects to the UI components.
+    val locationFlow: Flow<List<PokeApiService.Location>> = _locationFlow
 
     //launch coroutine with viewModelScope to fetch list of Pokémon from server with getPokeListFromServer()
     //
@@ -51,8 +60,15 @@ class PokeViewModel : ViewModel() {
         }
     }
 
+    //launch coroutine with viewModelScope to fetch list of Pokémon from server with getPokeListFromServer()
+    //
+    suspend fun requestLocationsList(regionId: Int) {
+        val locationList = getLocationListFromServer(1)
+        locationList?.let { _locationFlow.emit(locationList)}
+    }
+
     //API Call to get the list of pokemon
-    private suspend fun getPokeListFromServer(): List<Pokemon>? {
+    private suspend fun getPokeListFromServer(): List<PokeApiService.Pokemon>? {
         return withContext(Dispatchers.IO) {
             val response = pokeService.getPokemonList(151)
             if (response.code() == HttpURLConnection.HTTP_OK) {
@@ -68,4 +84,16 @@ class PokeViewModel : ViewModel() {
         }
     }
 
+    //API call to get the list of locations
+    private suspend fun getLocationListFromServer(regionId: Int): List<PokeApiService.Location>? {
+        return withContext(Dispatchers.IO) {
+            val response = pokeService.getLocationList(1)
+            if (response.code() == HttpURLConnection.HTTP_OK) {
+                val region = response.body()
+                region?.locations
+            } else {
+                null
+            }
+        }
+    }
 }

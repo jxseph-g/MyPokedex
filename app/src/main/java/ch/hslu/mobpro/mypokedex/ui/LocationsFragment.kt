@@ -3,34 +3,31 @@ package ch.hslu.mobpro.mypokedex.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.hslu.mobpro.firstpokedex.model.PokemonListAdapter
+import ch.hslu.mobpro.mypokedex.databinding.FragmentLocationsBinding
 import ch.hslu.mobpro.mypokedex.databinding.FragmentPokedexBinding
+import ch.hslu.mobpro.mypokedex.model.LocationListAdapter
 import ch.hslu.mobpro.mypokedex.model.PokeViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 
-/*
-This Class is responsible for displaying the FULL POKEDEX
-It displays a list of Pokémon fetched from the PokeMainViewModel.
-The class inflates its layout using the FragmentPokedexBinding class, sets up a
-RecyclerView with a PokemonListAdapter, and populates the list with the Pokémon data
-collected from the PokeViewModel's pokeFlow.
- */
-class PokedexFragment : Fragment() {
 
-    private lateinit var adapter: PokemonListAdapter
+class LocationsFragment : Fragment() {
+
+    private lateinit var adapter: LocationListAdapter
 
     private val pokeViewModel: PokeViewModel by viewModels()
 
-    private var _binding: FragmentPokedexBinding? = null
+    private var _binding: FragmentLocationsBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -53,13 +50,15 @@ class PokedexFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentPokedexBinding.inflate(inflater, container, false)
+        _binding = FragmentLocationsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        pokeViewModel.requestPokeList()
+        lifecycleScope.launch {
+            pokeViewModel.requestLocationsList(1)
+        }
     }
 
     //MAIN CODE
@@ -68,26 +67,17 @@ class PokedexFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize the adapter and set the layout manager outside the collect block
-        adapter = PokemonListAdapter(emptyList())
-        binding.pokemonList.adapter = adapter
-        binding.pokemonList.layoutManager = LinearLayoutManager(requireContext())
+        adapter = LocationListAdapter(requireContext())
+        binding.locationsList.adapter = adapter
+        binding.locationsList.layoutManager = LinearLayoutManager(requireContext())
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                pokeViewModel.pokeFlow.collect { pokemons ->
-                    // Update the adapter's data instead of creating a new adapter each time
-                    adapter.updateData(pokemons)
-
-                    // Set an onItemClickListener for the adapter
-                    adapter.setOnItemClickListener(object : PokemonListAdapter.onItemClickListener {
-                        override fun onItemClick(position: Int) {
-                            // Handle item click
-                        }
-                    })
-
-                    // Update the text to display the number of loaded Pokémon
-                    //binding.pokemonNr.text = "#" + if (pokemons.isEmpty()) 0 else pokemons.size
-                }
+                // pass 1 to get locations from Kanto region
+                pokeViewModel.locationFlow.collect { locations ->
+                        // Update the adapter's data instead of creating a new adapter each time
+                        adapter.updateData(locations)
+                    }
             }
         }
     }

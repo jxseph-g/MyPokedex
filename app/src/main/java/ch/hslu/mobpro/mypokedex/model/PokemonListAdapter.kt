@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import ch.hslu.mobpro.mypokedex.databinding.ListItemPokemonBinding
-import ch.hslu.mobpro.mypokedex.network.Pokemon
+import ch.hslu.mobpro.mypokedex.network.PokeApiService
 import com.squareup.picasso.Picasso
 
 /*
@@ -14,7 +14,7 @@ Recycler Adapter Class
 This class gets the pokedex id nr and name and puts it into the recycler view --> list_item_pokemon.xml
  */
 
-class PokemonListAdapter(private var pokemonList: List<Pokemon>) : RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
+class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) : RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
 
     private lateinit var mListener : onItemClickListener
 
@@ -43,7 +43,7 @@ class PokemonListAdapter(private var pokemonList: List<Pokemon>) : RecyclerView.
     }
 
     // this method updated the adapter's data
-    fun updateData(newPokemons: List<Pokemon>) {
+    fun updateData(newPokemons: List<PokeApiService.Pokemon>) {
         pokemonList = newPokemons
         notifyDataSetChanged()
     }
@@ -59,7 +59,7 @@ class PokemonListAdapter(private var pokemonList: List<Pokemon>) : RecyclerView.
             }
         }
 
-        fun bind(pokemon: Pokemon) {
+        fun bind(pokemon: PokeApiService.Pokemon) {
             //get pkmn names and ids and put it with binding into recycler view
             binding.pokemonName.text = "${pokemon.name}"
             binding.pokedexNr.text = "${pokemon.id}"
