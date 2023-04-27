@@ -7,6 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ch.hslu.mobpro.mypokedex.databinding.FragmentPokemonDetailBinding
 import com.squareup.picasso.Picasso
+
+/*
+PokemonDetailFragment -> This class should load all the relevant information from
+the API regarding the Pokemon Clicked in the PokedexView or searched by
+ */
 class PokemonDetailFragment : Fragment() {
 
     private var _binding: FragmentPokemonDetailBinding? = null
