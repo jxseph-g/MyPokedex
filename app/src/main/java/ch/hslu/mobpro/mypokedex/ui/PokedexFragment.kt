@@ -67,24 +67,28 @@ class PokedexFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize the adapter and set the layout manager outside the collect block
+        adapter = PokemonListAdapter(emptyList())
+        binding.pokemonList.adapter = adapter
+        binding.pokemonList.layoutManager = LinearLayoutManager(requireContext())
+
         lifecycleScope.launch {
-
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-
                 pokeMainViewModel.pokeFlow.collect { pokemons ->
+                    // Update the adapter's data instead of creating a new adapter each time
+                    adapter.updateData(pokemons)
 
-                    val adapter = PokemonListAdapter(pokemons)
+                    // Set an onItemClickListener for the adapter
+                    adapter.setOnItemClickListener(object : PokemonListAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            // Handle item click
+                        }
+                    })
 
-                    binding.pokemonList.adapter = adapter
-
-                    binding.pokemonList.layoutManager = LinearLayoutManager(requireContext())
-
-                    //just to add a text to see how many pkmn it loads
+                    // Update the text to display the number of loaded Pokémon
                     //binding.pokemonNr.text = "#" + if (pokemons.isEmpty()) 0 else pokemons.size
-
                 }
             }
-
         }
     }
 

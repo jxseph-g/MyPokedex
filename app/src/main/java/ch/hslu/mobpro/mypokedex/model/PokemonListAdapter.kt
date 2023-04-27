@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import ch.hslu.mobpro.mypokedex.databinding.ListItemPokemonBinding
+import ch.hslu.mobpro.mypokedex.network.Pokemon
 import com.squareup.picasso.Picasso
 
 /*
@@ -13,7 +14,7 @@ Recycler Adapter Class
 This class gets the pokedex id nr and name and puts it into the recycler view --> list_item_pokemon.xml
  */
 
-class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
+class PokemonListAdapter(private var pokemonList: List<Pokemon>) : RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
 
     private lateinit var mListener : onItemClickListener
 
@@ -40,6 +41,13 @@ class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.
         val pokemon = pokemonList[position]
         holder.bind(pokemon)
     }
+
+    // this method updated the adapter's data
+    fun updateData(newPokemons: List<Pokemon>) {
+        pokemonList = newPokemons
+        notifyDataSetChanged()
+    }
+
 
     inner class PokemonViewHolder(private val binding: ListItemPokemonBinding, listener: onItemClickListener) : RecyclerView.ViewHolder(binding.root) {
 
