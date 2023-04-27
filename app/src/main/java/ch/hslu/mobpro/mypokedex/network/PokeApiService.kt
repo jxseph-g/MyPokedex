@@ -1,0 +1,21 @@
+package ch.hslu.mobpro.mypokedex.network
+
+import ch.hslu.mobpro.firstpokedex.model.PokemonListResponse
+import com.google.gson.annotations.SerializedName
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+//full URL : https://pokeapi.co/api/v2/pokemon/{id or name}/
+
+/*
+This is a helper class that defines the API service interface and methods
+to call the API.
+ */
+interface PokeApiService {
+
+    //with the offset @Query Limit we will get every name / pokemon from
+    // pokemon id / pokédex nr 1 to 151 (actually 152 since it starts at zero!) == only GEN 1 !
+    @GET("pokemon")
+    suspend fun getPokemonList(@Query("limit") limit: Int): Response<PokemonListResponse>
+}

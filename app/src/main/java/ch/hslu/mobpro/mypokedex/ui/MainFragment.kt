@@ -1,4 +1,4 @@
-package ch.hslu.mobpro.mypokedex.main
+package ch.hslu.mobpro.mypokedex.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle

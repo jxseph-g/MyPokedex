@@ -75,7 +75,7 @@
         <!-- First Pokemon type text view -->
         <TextView
             android:id="@+id/pokemon_type_1"
-            android:text="fire"
+            tools:text="fire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
@@ -89,6 +89,7 @@
         <!-- Second Pokemon type text view -->
         <TextView
             android:id="@+id/pokemon_type_2"
+            tools:text="type_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
@@ -117,7 +118,8 @@
         <!-- Pokemon description text view -->
         <TextView
             android:id="@+id/pokemon_description"
-            android:text="description of pokemon blabla"
+            tools:text="
+It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
