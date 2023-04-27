@@ -1,0 +1,40 @@
+package ch.hslu.mobpro.mypokedex.ui
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import ch.hslu.mobpro.mypokedex.databinding.FragmentPokemonDetailBinding
+import com.squareup.picasso.Picasso
+class PokemonDetailFragment : Fragment() {
+
+    private var _binding: FragmentPokemonDetailBinding? = null
+    private val binding get() = _binding!!
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPokemonDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        // Load the Pokemon image using Picasso
+        // Use the Pokemon ID instead of the hardcoded value for the actual implementation
+        val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+        Picasso.get().load(imageUrl).into(binding.pokemonImage)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
