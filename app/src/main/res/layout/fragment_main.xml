@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5sp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -106,7 +107,7 @@
             android:layout_columnWeight="1"
             android:padding="20dp"
             android:text="All Items"
-            android:background="@color/lighterGrey" />
+            android:background="@color/teal_200" />
 
         <Button
             android:id="@+id/locations_button"

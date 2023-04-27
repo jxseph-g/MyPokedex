@@ -9,7 +9,7 @@
     android:clickable="true"
     android:clipToPadding="false"
     android:focusable="true"
-    android:padding="8dp">
+    android:padding="9dp">
 
     <TextView
         android:id="@+id/pokedex_nr"
