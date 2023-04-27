@@ -1,6 +1,5 @@
 package ch.hslu.mobpro.mypokedex.network
 
-import ch.hslu.mobpro.firstpokedex.model.PokemonListResponse
 import com.google.gson.annotations.SerializedName
 import retrofit2.Response
 import retrofit2.http.GET
@@ -19,3 +18,19 @@ interface PokeApiService {
     @GET("pokemon")
     suspend fun getPokemonList(@Query("limit") limit: Int): Response<PokemonListResponse>
 }
+
+data class Pokemon(
+
+    var id: Int?,
+
+    @SerializedName("name")
+    val name: String?,
+
+    @SerializedName("url")
+    val url: String?
+)
+
+data class PokemonListResponse(
+    @SerializedName("results")
+    val pokemonList: List<Pokemon>
+)
