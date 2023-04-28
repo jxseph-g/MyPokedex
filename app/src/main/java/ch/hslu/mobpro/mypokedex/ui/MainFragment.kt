@@ -59,6 +59,12 @@ class MainFragment : Fragment() {
         // "Pokedex" Button - opens the full pokedex view --> PokedexFragment.kt
         binding.pokedexButton.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             transaction.replace(R.id.fragment_container, PokedexFragment())
             transaction.addToBackStack(null)
             transaction.commit()
@@ -67,6 +73,12 @@ class MainFragment : Fragment() {
         //"All Locations" Button - opens all the locations --> CityFragment
         binding.locationsButton.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             transaction.replace(R.id.fragment_container, LocationsFragment())
             transaction.addToBackStack(null)
             transaction.commit()
