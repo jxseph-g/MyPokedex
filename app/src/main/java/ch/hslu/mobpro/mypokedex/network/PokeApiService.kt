@@ -3,6 +3,7 @@ package ch.hslu.mobpro.mypokedex.network
 import android.graphics.Region
 import android.location.Location
 import com.google.gson.annotations.SerializedName
+import okhttp3.internal.Version
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,6 +29,9 @@ interface PokeApiService {
     @GET("pokemon/{id}")
     suspend fun getPokemonDetails(@Path("id") id: Int): Response<Pokemon>
 
+    @GET("pokemon-species/{id}")
+    suspend fun getPokemonSpecies(@Path("id") id: Int): Response<PokemonSpecies>
+
     //POKEMON
     data class Pokemon(
 
@@ -47,6 +51,26 @@ interface PokeApiService {
 
         @SerializedName("stats")
         val stats: List<Stat>,
+    )
+
+    data class PokemonSpecies(
+
+        @SerializedName("flavor_text_entries")
+        val flavorTextEntries: List<FlavorTextEntry>
+    )
+
+    data class FlavorTextEntry(
+        @SerializedName("flavor_text")
+        val flavorText: String,
+        @SerializedName("language")
+        val language: Language,
+    )
+
+    data class Language(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
     )
 
     data class Type(

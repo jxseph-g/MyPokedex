@@ -62,12 +62,6 @@ class PokeViewModel : ViewModel() {
         }
     }
 
-    fun requestPokemonDetails(pokemonId: Int) {
-        viewModelScope.launch {
-            val fullPokemon = getPokemonDetails(pokemonId)
-        }
-    }
-
     //launch coroutine with viewModelScope to fetch list of Pokémon from server with getPokeListFromServer()
     //
     suspend fun requestLocationsList(regionId: Int) {
@@ -104,6 +98,17 @@ class PokeViewModel : ViewModel() {
         }
     }
 
+    //API call to get pokemon species AKA pokemon description etc.
+    suspend fun getPokemonSpecies(id: Int): PokeApiService.PokemonSpecies? {
+        return withContext(Dispatchers.IO) {
+            val response = pokeService.getPokemonSpecies(id)
+            if (response.code() == HttpURLConnection.HTTP_OK) {
+                response.body()
+            } else {
+                null
+            }
+        }
+    }
 
     //API call to get the list of locations
     private suspend fun getLocationListFromServer(regionId: Int): List<PokeApiService.Location>? {

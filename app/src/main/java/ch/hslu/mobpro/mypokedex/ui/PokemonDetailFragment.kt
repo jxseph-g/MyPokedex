@@ -50,10 +50,11 @@ class PokemonDetailFragment : Fragment() {
             // Extract Pokemon ID
             val pokemonId = pokemon.id ?: return@Observer
 
-            // Request Pokemon details
+            // Request Pokemon details = details such as types and also species / description text
             lifecycleScope.launch {
                 val fullPokemon = pokeViewModel.getPokemonDetails(pokemonId)
-                // Update the UI with the selected Pokemon data
+                val pokemonSpecies = pokeViewModel.getPokemonSpecies(pokemonId)
+
                 val types = fullPokemon?.types?.map { it.type.name }
 
                 if (types != null && types.size < 2) {
@@ -61,18 +62,43 @@ class PokemonDetailFragment : Fragment() {
                 }
 
                 //now extract types from json
-                var type1 = types?.getOrNull(0)
-                var type1Color = getBackgroundColor(type1)
-                var type1ColorConv = getResources().getColor(type1Color)
+                val type1 = types?.getOrNull(0)
+                val type1Color = getBackgroundColor(type1)
+                val type1ColorConv = getResources().getColor(type1Color)
                 //val type1 = "fire"
-                var type2 = types?.getOrNull(1)
-                var type2Color = getBackgroundColor(type2)
-                var type2ColorConv = getResources().getColor(type2Color)
+                val type2 = types?.getOrNull(1)
+                val type2Color = getBackgroundColor(type2)
+                val type2ColorConv = getResources().getColor(type2Color)
                 //val type2 = "fire"
                 binding.pokemonType1.text = type1
                 binding.pokemonType1.setBackgroundColor(type1ColorConv)
                 binding.pokemonType2.text = type2
                 binding.pokemonType2.setBackgroundColor(type2ColorConv)
+
+                //stats of the pokemon
+                val hp = fullPokemon?.stats?.firstOrNull { it.stat.name == "hp" }?.baseStat ?: 0
+                binding.hpValue.text = hp.toString()
+
+                val attack = fullPokemon?.stats?.firstOrNull { it.stat.name == "attack" }?.baseStat ?: 0
+                binding.attValue.text = attack.toString()
+
+                val defense = fullPokemon?.stats?.firstOrNull { it.stat.name == "defense" }?.baseStat ?: 0
+                binding.defValue.text = defense.toString()
+
+                val specialAttack = fullPokemon?.stats?.firstOrNull { it.stat.name == "special-attack" }?.baseStat ?: 0
+                binding.spzValue.text = specialAttack.toString()
+
+                val speed = fullPokemon?.stats?.firstOrNull { it.stat.name == "speed" }?.baseStat ?: 0
+                binding.spdValue.text = speed.toString()
+
+                //get pokemon text description in english
+                val description = pokemonSpecies?.flavorTextEntries?.firstOrNull { it.language.name == "en" }?.flavorText
+
+                //replace line breaks from api with space
+                val formattedDescription = description?.replace("\n", " ")?.trim()
+
+                //bind beauuuutiful description to layout =)
+                binding.pokemonDescription.text = formattedDescription
             }
 
             //capitalize pokemon names
@@ -121,3 +147,5 @@ fun getBackgroundColor(type: String?): Int {
     }
     return R.color.black
 }
+
+

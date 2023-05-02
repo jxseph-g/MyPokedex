@@ -41,20 +41,26 @@
         <!-- Pokemon name text view -->
         <TextView
             android:id="@+id/pokemon_name"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="27sp"
-            android:textStyle="bold"
             tools:text="Charmander"/>
 
         <!-- Pokemon number text view -->
         <TextView
             android:id="@+id/pokemon_number"
             android:text="004"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@color/grey"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
         <TextView
             android:layout_width="0dp"
@@ -69,9 +75,9 @@
             android:paddingLeft="8dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="@color/white"
-            android:minWidth="80dp"
+            android:minWidth="1000dp"
             tools:background="@color/semi_transp"/>
 
         <TextView
@@ -88,9 +94,9 @@
             android:paddingLeft="8dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="@color/white"
-            android:minWidth="80dp"
+            android:minWidth="1000dp"
             tools:background="@color/semi_transp"/>
 
 
@@ -111,12 +117,140 @@
         <!-- Pokemon description text view -->
         <TextView
             android:id="@+id/pokemon_description"
-            tools:text="
-It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail."
+            tools:text="It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail."
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
     </LinearLayout>
+
+    <!-- Pokemon stats layout -->
+    <LinearLayout
+        android:id="@+id/pokemon_stats_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pokemon_description_layout"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/HP"
+                android:text="HP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/hp_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                tools:text="100"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/att"
+                android:text="Attack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/att_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                tools:text="100"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/def"
+                android:text="Defense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/def_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                tools:text="100"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/spz"
+                android:text="Special"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/spz_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                tools:text="100"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/spd"
+                android:text="Speed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/spd_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                tools:text="100"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
