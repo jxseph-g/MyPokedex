@@ -57,23 +57,29 @@ class PokemonDetailFragment : Fragment() {
 
                 val types = fullPokemon?.types?.map { it.type.name }
 
-                if (types != null && types.size < 2) {
-                    binding.pokemonType2.visibility = View.GONE
-                }
-
                 //now extract types from json
-                val type1 = types?.getOrNull(0)
-                val type1Color = getBackgroundColor(type1)
-                val type1ColorConv = getResources().getColor(type1Color)
-                //val type1 = "fire"
-                val type2 = types?.getOrNull(1)
-                val type2Color = getBackgroundColor(type2)
-                val type2ColorConv = getResources().getColor(type2Color)
-                //val type2 = "fire"
-                binding.pokemonType1.text = type1
-                binding.pokemonType1.setBackgroundColor(type1ColorConv)
-                binding.pokemonType2.text = type2
-                binding.pokemonType2.setBackgroundColor(type2ColorConv)
+                if (types != null && types.size < 2) {
+                    val type1 = types?.getOrNull(0)
+                    val type1Color = getBackgroundColor(type1)
+                    val type1ColorConv = getResources().getColor(type1Color)
+                    binding.pokemonType2.text = type1
+                    binding.pokemonType2.setBackgroundColor(type1ColorConv)
+                    //set type1 with no text to push type2 to the bottom
+                    binding.pokemonType1.text = ""
+                } else {
+                    val type1 = types?.getOrNull(0)
+                    val type1Color = getBackgroundColor(type1)
+                    val type1ColorConv = getResources().getColor(type1Color)
+                    //val type1 = "fire"
+                    val type2 = types?.getOrNull(1)
+                    val type2Color = getBackgroundColor(type2)
+                    val type2ColorConv = getResources().getColor(type2Color)
+                    //val type2 = "fire"
+                    binding.pokemonType1.text = type1
+                    binding.pokemonType1.setBackgroundColor(type1ColorConv)
+                    binding.pokemonType2.text = type2
+                    binding.pokemonType2.setBackgroundColor(type2ColorConv)
+                }
 
                 //stats of the pokemon
                 val hp = fullPokemon?.stats?.firstOrNull { it.stat.name == "hp" }?.baseStat ?: 0

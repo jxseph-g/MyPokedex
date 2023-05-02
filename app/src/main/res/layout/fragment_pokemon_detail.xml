@@ -78,27 +78,30 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:minWidth="1000dp"
+            android:layout_weight="1"
+            android:layout_above="@+id/pokemon_stats_layout"
             tools:background="@color/semi_transp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_alignParentBottom="true"/>
 
         <!-- Second Pokemon type text view -->
         <TextView
             android:id="@+id/pokemon_type_2"
-            tools:text="type 2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="1000dp"
             android:paddingLeft="8dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:textSize="20sp"
             android:textColor="@color/white"
-            android:minWidth="1000dp"
-            tools:background="@color/semi_transp"/>
-
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            tools:background="@color/semi_transp"
+            tools:text="type 2" />
 
     </LinearLayout>
 
