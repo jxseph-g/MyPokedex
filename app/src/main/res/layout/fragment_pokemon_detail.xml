@@ -72,8 +72,7 @@
             android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:minWidth="80dp"
-            android:background="@drawable/rounded_text_background"/>/>
+            android:minWidth="80dp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -91,8 +90,7 @@
             android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:minWidth="80dp"
-            android:background="@drawable/rounded_text_background"/>/>
+            android:minWidth="80dp"/>
 
 
     </LinearLayout>

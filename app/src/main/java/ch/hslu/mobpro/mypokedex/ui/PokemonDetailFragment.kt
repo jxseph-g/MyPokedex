@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import ch.hslu.mobpro.mypokedex.databinding.FragmentPokemonDetailBinding
+import ch.hslu.mobpro.mypokedex.model.PokeViewModel
 import ch.hslu.mobpro.mypokedex.model.PokemonDetailViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 
 /*
 PokemonDetailFragment -> This class should load all the relevant information from
@@ -18,6 +22,8 @@ the API regarding the Pokemon Clicked in the PokedexView or searched by
 class PokemonDetailFragment : Fragment() {
 
     private val viewModel: PokemonDetailViewModel by activityViewModels()
+    private val pokeViewModel: PokeViewModel by viewModels()
+
 
     private var _binding: FragmentPokemonDetailBinding? = null
     private val binding get() = _binding!!
@@ -37,6 +43,19 @@ class PokemonDetailFragment : Fragment() {
 
         viewModel.getSelectedPokemon().observe(viewLifecycleOwner, Observer { pokemon ->
 
+            // Extract Pokemon ID
+            val pokemonId = pokemon.id ?: return@Observer
+
+            // Request Pokemon details
+            // Request Pokemon details
+            lifecycleScope.launch {
+                val fullPokemon = pokeViewModel.getPokemonDetails(pokemonId)
+                // Update the UI with the selected Pokemon data
+                val types = fullPokemon?.types?.map { it.type.name }
+                binding.pokemonType1.text = types?.getOrNull(0)
+                binding.pokemonType2.text = types?.getOrNull(1)
+            }
+
             //capitalize pokemon names
             val name = pokemon.name?.capitalize()
 
@@ -48,9 +67,7 @@ class PokemonDetailFragment : Fragment() {
             binding.pokemonNumber.text = pokedexId
             Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png")
                 .into(binding.pokemonImage)
-
         })
-
     }
 
     override fun onDestroyView() {

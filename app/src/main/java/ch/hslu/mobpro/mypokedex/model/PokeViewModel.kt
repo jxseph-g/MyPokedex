@@ -26,11 +26,8 @@ private const val BASE_URL = "https://pokeapi.co/api/v2/"
 class PokeViewModel : ViewModel() {
 
     //create retrofit instance
-    private val retrofit = Retrofit.Builder()
-        .client(OkHttpClient().newBuilder().build())
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
-        .build()
+    private val retrofit = Retrofit.Builder().client(OkHttpClient().newBuilder().build())
+        .addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build()
 
     //create pokeService with retrofit and thanks to PokeApiService class
     private val pokeService = retrofit.create(PokeApiService::class.java)
@@ -44,12 +41,17 @@ class PokeViewModel : ViewModel() {
     val pokeFlow: Flow<List<PokeApiService.Pokemon>> = _pokeFlow
 
     //Location List GEN 1
-//_locationFlow is a private MutableStateFlow object that holds the list of Location objects
+    //_locationFlow is a private MutableStateFlow object that holds the list of Location objects
     private val _locationFlow: MutableStateFlow<List<PokeApiService.Location>> =
         MutableStateFlow(emptyList())
 
     //locationFlow: A public read-only Flow object that exposes the list of Location objects to the UI components.
     val locationFlow: Flow<List<PokeApiService.Location>> = _locationFlow
+
+    private val _pokemonDetailsFlow: MutableStateFlow<PokeApiService.Pokemon?> = MutableStateFlow(null)
+
+    val pokemonDetailsFlow: Flow<PokeApiService.Pokemon?> = _pokemonDetailsFlow
+
 
     //launch coroutine with viewModelScope to fetch list of Pokémon from server with getPokeListFromServer()
     //
@@ -60,11 +62,17 @@ class PokeViewModel : ViewModel() {
         }
     }
 
+    fun requestPokemonDetails(pokemonId: Int) {
+        viewModelScope.launch {
+            val fullPokemon = getPokemonDetails(pokemonId)
+        }
+    }
+
     //launch coroutine with viewModelScope to fetch list of Pokémon from server with getPokeListFromServer()
     //
     suspend fun requestLocationsList(regionId: Int) {
         val locationList = getLocationListFromServer(1)
-        locationList?.let { _locationFlow.emit(locationList)}
+        locationList?.let { _locationFlow.emit(locationList) }
     }
 
     //API Call to get the list of pokemon
@@ -78,6 +86,18 @@ class PokeViewModel : ViewModel() {
                     pokemon.id = id
                 }
                 pokemonListResponse?.pokemonList
+            } else {
+                null
+            }
+        }
+    }
+
+    //API Call and Parsing json from one single Pokemon into Pokemon Object
+    suspend fun getPokemonDetails(id: Int): PokeApiService.Pokemon? {
+        return withContext(Dispatchers.IO) {
+            val response = pokeService.getPokemonDetails(id)
+            if (response.code() == HttpURLConnection.HTTP_OK) {
+                response.body()
             } else {
                 null
             }

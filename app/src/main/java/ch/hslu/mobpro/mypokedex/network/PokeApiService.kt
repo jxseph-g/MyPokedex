@@ -1,6 +1,7 @@
 package ch.hslu.mobpro.mypokedex.network
 
 import android.graphics.Region
+import android.location.Location
 import com.google.gson.annotations.SerializedName
 import retrofit2.Response
 import retrofit2.http.GET
@@ -24,6 +25,9 @@ interface PokeApiService {
     @GET("region/{regionId}")
     suspend fun getLocationList(@Path("regionId") regionId: Int): Response<Region>
 
+    @GET("pokemon/{id}")
+    suspend fun getPokemonDetails(@Path("id") id: Int): Response<Pokemon>
+
     //POKEMON
     data class Pokemon(
 
@@ -33,7 +37,46 @@ interface PokeApiService {
         val name: String?,
 
         @SerializedName("url")
-        val url: String?
+        val url: String?,
+
+        @SerializedName("base_experience")
+        val baseExperience: Int,
+
+        @SerializedName("types")
+        val types: List<Type>,
+
+        @SerializedName("stats")
+        val stats: List<Stat>,
+    )
+
+    data class Type(
+        @SerializedName("slot")
+        val slot: Int,
+        @SerializedName("type")
+        val type: TypeDetails
+    )
+
+    data class TypeDetails(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class Stat(
+        @SerializedName("base_stat")
+        val baseStat: Int,
+        @SerializedName("effort")
+        val effort: Int,
+        @SerializedName("stat")
+        val stat: StatDetails
+    )
+
+    data class StatDetails(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
     )
 
     data class PokemonListResponse(
