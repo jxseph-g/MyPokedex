@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.hslu.mobpro.firstpokedex.model.PokemonListAdapter
+import ch.hslu.mobpro.mypokedex.R
 import ch.hslu.mobpro.mypokedex.databinding.FragmentPokedexBinding
 import ch.hslu.mobpro.mypokedex.model.PokeViewModel
+import ch.hslu.mobpro.mypokedex.model.PokemonDetailViewModel
 import kotlinx.coroutines.launch
 
 /*
@@ -29,6 +32,8 @@ class PokedexFragment : Fragment() {
     private lateinit var adapter: PokemonListAdapter
 
     private val pokeViewModel: PokeViewModel by viewModels()
+
+    private val detailViewModel: PokemonDetailViewModel by activityViewModels()
 
     private var _binding: FragmentPokedexBinding? = null
 
@@ -82,6 +87,20 @@ class PokedexFragment : Fragment() {
                     adapter.setOnItemClickListener(object : PokemonListAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             // Handle item click
+                            val selectedPokemon = pokemons[position]
+                            detailViewModel.setSelectedPokemon(selectedPokemon)
+
+                            // Navigate to PokemonDetailFragment
+                            val transaction = parentFragmentManager.beginTransaction()
+                            transaction.setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out
+                            )
+                            transaction.replace(R.id.fragment_container, PokemonDetailFragment())
+                            transaction.addToBackStack(null)
+                            transaction.commit()
                         }
                     })
 
