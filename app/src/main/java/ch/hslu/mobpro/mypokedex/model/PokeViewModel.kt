@@ -84,18 +84,6 @@ class PokeViewModel : ViewModel() {
         }
     }
 
-    //API Call to get the list of moves from a pokemon ID
-    private suspend fun getPokemonMovesList(id: Int): List<String>? {
-        return withContext(Dispatchers.IO) {
-            val response = pokeService.getPokemonMoves(id)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                val movesResponse = response.body()
-                movesResponse?.moves?.map { it.move }
-            } else {
-                null
-            }
-        }
-    }
 
     //API call to get the list of locations
     private suspend fun getLocationListFromServer(regionId: Int): List<PokeApiService.Location>? {

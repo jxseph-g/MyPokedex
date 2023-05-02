@@ -120,22 +120,4 @@ It has a preference for hot things. When it rains, steam is said to spout from t
             android:textColor="@color/black"/>
     </LinearLayout>
 
-    <!-- Pokemon Moves Layout -->
-    <LinearLayout
-        android:id="@+id/pokemon_moves_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pokemon_description_layout"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:padding="16dp"
-        android:background="@drawable/rounded_text_background">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/moves_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    </LinearLayout>
-
 </RelativeLayout>
