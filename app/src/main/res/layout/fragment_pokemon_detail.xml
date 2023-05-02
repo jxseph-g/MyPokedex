@@ -56,7 +56,6 @@
             android:textSize="20sp"
             android:textColor="@color/grey"/>
 
-        <!-- First Pokemon type text view -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -72,7 +71,8 @@
             android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:minWidth="80dp"/>
+            android:minWidth="80dp"
+            tools:background="@color/semi_transp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -90,7 +90,8 @@
             android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:minWidth="80dp"/>
+            android:minWidth="80dp"
+            tools:background="@color/semi_transp"/>
 
 
     </LinearLayout>

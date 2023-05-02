@@ -55,7 +55,6 @@ class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) 
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
                 val pokemonName = pokemonList[adapterPosition].name
-                Toast.makeText(itemView.context, "You clicked on $pokemonName", Toast.LENGTH_SHORT).show()
             }
         }
         fun bind(pokemon: PokeApiService.Pokemon) {
