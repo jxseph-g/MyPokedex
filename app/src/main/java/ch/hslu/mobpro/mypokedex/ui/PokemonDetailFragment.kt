@@ -46,6 +46,8 @@ class PokemonDetailFragment : Fragment() {
             // Update the UI with the selected Pokemon data
             binding.pokemonName.text = name
             binding.pokemonNumber.text = pokedexId
+            Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png")
+                .into(binding.pokemonImage)
 
         })
 

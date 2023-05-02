@@ -6,30 +6,28 @@
     <!-- Pokemon image view -->
     <FrameLayout
         android:id="@+id/pokemon_image_container"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_background"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp">
 
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp">
 
-        <View
-            android:layout_width="70sp"
-            android:layout_height="25sp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="135dp"
-            android:background="@drawable/shadow"
-            android:alpha="0.7"/>
+            <ImageView
+                android:id="@+id/pokemon_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:background="@drawable/glumanda" />
 
-        <ImageView
-            android:id="@+id/pokemon_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:background="@drawable/glumanda"/>
+        </FrameLayout>
 
     </FrameLayout>
 
-    <!-- Pokemon name and number layout -->
+    <!-- Pokemon name and info layout -->
     <LinearLayout
         android:id="@+id/pokemon_name_layout"
         android:layout_width="match_parent"
@@ -45,9 +43,9 @@
             android:id="@+id/pokemon_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="27sp"
             android:textStyle="bold"
-            android:text="GLUMANDA"/>
+            tools:text="Charmander"/>
 
         <!-- Pokemon number text view -->
         <TextView
@@ -55,51 +53,47 @@
             android:text="004"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="@color/grey"/>
 
-    </LinearLayout>
-
-    <!-- Pokemon type layout -->
-    <LinearLayout
-        android:id="@+id/pokemon_type_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pokemon_image_container"
-        android:layout_toRightOf="@id/pokemon_image_container"
-        android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp">
-
         <!-- First Pokemon type text view -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
         <TextView
             android:id="@+id/pokemon_type_1"
             tools:text="fire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:background="@color/teal"/>
+            android:minWidth="80dp"
+            android:background="@drawable/rounded_text_background"/>/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
         <!-- Second Pokemon type text view -->
         <TextView
             android:id="@+id/pokemon_type_2"
-            tools:text="type_2"
+            tools:text="type 2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:background="@color/darkRed"
-            android:layout_marginLeft="8dp"/>
+            android:minWidth="80dp"
+            android:background="@drawable/rounded_text_background"/>/>
+
 
     </LinearLayout>
 
@@ -108,12 +102,12 @@
         android:id="@+id/pokemon_description_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pokemon_type_layout"
+        android:layout_below="@id/pokemon_image_container"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:padding="16dp"
-        android:background="@color/teal">
+        android:background="@drawable/rounded_text_background">
 
         <!-- Pokemon description text view -->
         <TextView
