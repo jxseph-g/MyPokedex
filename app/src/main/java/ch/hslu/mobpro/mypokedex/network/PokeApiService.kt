@@ -24,6 +24,9 @@ interface PokeApiService {
     @GET("region/{regionId}")
     suspend fun getLocationList(@Path("regionId") regionId: Int): Response<Region>
 
+    //fetches the list of moves thanks to the id
+    @GET("pokemon/{id}/moves")
+    suspend fun getPokemonMoves(@Path("id") id: Int): Response<PokemonMovesListResponse>
 
     //POKEMON
     data class Pokemon(
@@ -40,6 +43,16 @@ interface PokeApiService {
     data class PokemonListResponse(
         @SerializedName("results")
         val pokemonList: List<Pokemon>
+    )
+
+    data class PokemonMoves(
+        @SerializedName("name")
+        val move: String
+    )
+
+    data class PokemonMovesListResponse(
+        @SerializedName("moves")
+        val moves: List<PokemonMoves>
     )
 
     //LOCATIONS
