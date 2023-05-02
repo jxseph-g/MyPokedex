@@ -36,7 +36,8 @@
         android:orientation="vertical"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:paddingBottom="15dp">
 
         <!-- Pokemon name text view -->
         <TextView
@@ -44,7 +45,7 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="27sp"
+            android:textSize="27dp"
             tools:text="Charmander"/>
 
         <!-- Pokemon number text view -->
@@ -54,7 +55,7 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textColor="@color/grey"/>
 
         <TextView
@@ -75,7 +76,7 @@
             android:paddingLeft="8dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:minWidth="1000dp"
             android:layout_weight="1"
@@ -97,7 +98,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:layout_weight="1"
             android:gravity="bottom"
             tools:background="@color/semi_transp"
@@ -110,18 +111,19 @@
         android:id="@+id/pokemon_description_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pokemon_image_container"
+        android:layout_below="@id/pokemon_name_layout"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:padding="16dp"
+        android:paddingTop="10dp"
         android:background="@drawable/rounded_text_background">
 
         <!-- Pokemon description text view -->
         <TextView
             android:id="@+id/pokemon_description"
             tools:text="It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail."
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black" />
@@ -149,14 +151,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/hp_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
                 tools:text="100"/>
         </LinearLayout>
@@ -172,14 +174,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/att_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
                 tools:text="100"/>
         </LinearLayout>
@@ -195,14 +197,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/def_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
                 tools:text="100"/>
         </LinearLayout>
@@ -218,14 +220,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/spz_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
                 tools:text="100"/>
         </LinearLayout>
@@ -241,14 +243,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/spd_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
                 tools:text="100"/>
         </LinearLayout>
