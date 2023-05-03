@@ -152,7 +152,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="@color/black"/>
 
             <ProgressBar
@@ -171,7 +171,7 @@
                 android:id="@+id/hp_value"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 android:maxWidth="30dp"
@@ -191,7 +191,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="@color/black"/>
 
             <ProgressBar
@@ -200,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:max="155"
+                android:max="250"
                 android:paddingVertical="0dp"
                 android:progress="100"
                 android:progressTint="@color/green"
@@ -210,7 +210,7 @@
                 android:id="@+id/att_value"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 android:maxWidth="30dp"
@@ -229,7 +229,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="@color/black"/>
 
             <ProgressBar
@@ -238,7 +238,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:max="180"
+                android:max="250"
                 android:paddingVertical="0dp"
                 android:progress="19"
                 android:progressTint="@color/green"
@@ -248,7 +248,7 @@
                 android:id="@+id/def_value"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 android:maxWidth="30dp"
@@ -267,7 +267,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="@color/black"/>
 
             <ProgressBar
@@ -276,7 +276,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:max="154"
+                android:max="250"
                 android:paddingVertical="0dp"
                 android:progress="59"
                 android:progressTint="@color/green"
@@ -286,7 +286,7 @@
                 android:id="@+id/spz_value"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 android:maxWidth="30dp"
@@ -305,7 +305,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="@color/black"/>
 
             <ProgressBar
@@ -314,7 +314,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:max="150"
+                android:max="250"
                 android:paddingVertical="0dp"
                 android:progress="0"
                 android:progressTint="@color/green"
@@ -324,7 +324,7 @@
                 android:id="@+id/spd_value"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 android:maxWidth="30dp"

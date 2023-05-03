@@ -1,188 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="15dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true">
-
-    </RelativeLayout>
-
-    <!-- Collapsing toolbar with greeting -->
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/eighty_percent_transp">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/pokemon_header_image"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="-25dp"
+            tools:background="@drawable/glumanda" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-80dp"
+            android:text="Hello, Trainer"
+            android:textColor="@color/lightGrey"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:paddingTop="30dp"
+            android:paddingLeft="10dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="vertical"
-                android:padding="10sp">
+    </LinearLayout>
 
-
-                <ImageView
-                    android:id="@+id/pokemon_header_image"
-                    android:layout_width="230dp"
-                    android:layout_height="230dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="-45dp"
-                    android:layout_marginEnd="-35dp"
-                    android:adjustViewBounds="true"
-                    tools:background="@drawable/glumanda"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="-80dp"
-                    android:text="Hello, Trainer"
-                    android:textColor="@color/white"
-                    android:textSize="32sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- Buttons section -->
-    <GridLayout
-        android:id="@+id/buttons_grid"
+    <LinearLayout
+        android:id="@+id/search_bar_pkmn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/app_bar_layout"
-        android:layout_marginStart="5sp"
-        android:layout_marginTop="5sp"
-        android:layout_marginEnd="5sp"
-        android:layout_marginBottom="5sp"
-        android:columnCount="2"
-        android:orientation="horizontal"
-        android:padding="1dp"
-        android:rowCount="3"
-        android:useDefaultMargins="true">
+        android:orientation="vertical"
+        android:paddingTop="10dp">
 
-        <Button
-            android:id="@+id/pokedex_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnSpan="2"
-            android:layout_columnWeight="1"
-            android:text="Full Pokedex"
-            android:padding="20dp"
-            android:background="@color/purple_700" />
-
-        <Button
-            android:id="@+id/items_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:padding="20dp"
-            android:text="All Items"
-            android:background="@color/teal_200" />
-
-        <Button
-            android:id="@+id/locations_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:padding="20dp"
-            android:text="All Locations"
-            android:background="@color/indigo" />
-
-        <Button
-            android:id="@+id/team_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:padding="20dp"
-            android:text="My Team"
-            android:background="@color/lightPurple" />
-
-        <Button
-            android:id="@+id/abilities_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:padding="20dp"
-            android:text="All Abilities"
-            android:background="@color/green" />
-
-        <Button
-            android:id="@+id/type_charts_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:padding="20dp"
-            android:text="Type Charts"
-            android:background="@color/lightBlue" />
-
-        <Button
-            android:id="@+id/trainer_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:padding="20dp"
-            android:text="Trainer Info"
-            android:background="@color/brown" />
-
-    </GridLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_layout"
+    <androidx.appcompat.widget.SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:endIconDrawable="@drawable/baseline_search_24"
-        android:layout_below="@+id/buttons_grid"
-        app:endIconMode="custom"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:hintEnabled="false"
-        app:boxStrokeColor="@color/white"
-        app:boxStrokeWidth="2dp">
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/eighty_percent_transp"
+        android:textColor="@android:color/darker_gray"
+        app:iconifiedByDefault="false"
+        app:queryHint="Enter a Pokemon name or ID"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_edit_text"
+    </LinearLayout>
+    <!-- Buttons section -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint="Search for a Pokémon, Item, or Location"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:layout_below="@+id/search_bar_pkmn"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <GridLayout
+                android:id="@+id/buttons_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/app_bar_layout"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                android:rowCount="3"
+                android:useDefaultMargins="true">
+
+                <Button
+                    android:id="@+id/pokedex_button"
+                    android:background="@drawable/button_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:backgroundTint="@color/teal_200"
+                    android:padding="20dp"
+                    android:text="Pokedex" />
+
+                <Button
+                    android:id="@+id/locations_button"
+                    android:background="@drawable/button_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:backgroundTint="@color/indigo"
+                    android:padding="20dp"
+                    android:text="All Locations" />
+
+                <Button
+                    android:id="@+id/team_button"
+                    android:background="@drawable/button_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:backgroundTint="@color/lightPurple"
+                    android:padding="20dp"
+                    android:text="Badges" />
+
+                <Button
+                    android:id="@+id/abilities_button"
+                    android:background="@drawable/button_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:backgroundTint="@color/green"
+                    android:padding="20dp"
+                    android:text="Type Charts" />
+
+                <Button
+                    android:id="@+id/type_charts_button"
+                    android:background="@drawable/button_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:backgroundTint="@color/lightBlue"
+                    android:padding="20dp"
+                    android:text="My Favorites" />
+
+                <Button
+                    android:id="@+id/trainer_card"
+                    android:background="@drawable/button_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:backgroundTint="@color/brown"
+                    android:padding="20dp"
+                    android:text="Trainer Info" />
+
+            </GridLayout>
+
+        </LinearLayout>
 
 </RelativeLayout>

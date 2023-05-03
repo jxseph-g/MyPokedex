@@ -55,5 +55,7 @@
     <color name="fairy_type">#FFD685AD</color>
 
     <color name="semi_transp">#80FFFFFF</color>
+    <color name="eighty_percent_transp">#955C5C5C</color>
+    <color name="teal_200_transp">#B403DAC5</color>
 
 </resources>
