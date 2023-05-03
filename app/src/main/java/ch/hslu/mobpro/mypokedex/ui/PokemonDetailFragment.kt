@@ -82,20 +82,35 @@ class PokemonDetailFragment : Fragment() {
                 }
 
                 //stats of the pokemon
+                //hp
                 val hp = fullPokemon?.stats?.firstOrNull { it.stat.name == "hp" }?.baseStat ?: 0
                 binding.hpValue.text = hp.toString()
+                val hpProgressBar = binding.hpProgressBar
+                hpProgressBar.progress = hp
 
+                //attack
                 val attack = fullPokemon?.stats?.firstOrNull { it.stat.name == "attack" }?.baseStat ?: 0
                 binding.attValue.text = attack.toString()
+                val attackProgressBar = binding.attackProgressBar
+                attackProgressBar.progress = attack
 
+                //def
                 val defense = fullPokemon?.stats?.firstOrNull { it.stat.name == "defense" }?.baseStat ?: 0
                 binding.defValue.text = defense.toString()
+                val defenseProgressBar = binding.defenseProgressBar
+                defenseProgressBar.progress = defense
 
+                //specialAttack or spz
                 val specialAttack = fullPokemon?.stats?.firstOrNull { it.stat.name == "special-attack" }?.baseStat ?: 0
                 binding.spzValue.text = specialAttack.toString()
+                val specialAttackeProgressBar = binding.spzProgressBar
+                specialAttackeProgressBar.progress = specialAttack
 
+                //speed or spd
                 val speed = fullPokemon?.stats?.firstOrNull { it.stat.name == "speed" }?.baseStat ?: 0
                 binding.spdValue.text = speed.toString()
+                val speedProgressBar = binding.spdProgressBar
+                speedProgressBar.progress = speed
 
                 //get pokemon text description in english
                 val description = pokemonSpecies?.flavorTextEntries?.firstOrNull { it.language.name == "en" }?.flavorText
