@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trainer_card"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_corners_location"
+                android:background="@drawable/rounded_corners_badges"
                 android:padding="10dp">
 
                 <ImageView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/badge1_layout"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_corners_location"
+                android:background="@drawable/rounded_corners_badges"
                 android:padding="10dp">
 
                 <ImageView
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/badge2_layout"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_corners_location"
+                android:background="@drawable/rounded_corners_badges"
                 android:padding="10dp">
 
                 <ImageView
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/badge3_layout"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_corners_location"
+                android:background="@drawable/rounded_corners_badges"
                 android:padding="10dp">
 
                 <ImageView
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/badge4_layout"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_corners_location"
+                android:background="@drawable/rounded_corners_badges"
                 android:padding="10dp">
 
                 <ImageView
@@ -182,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/badge5_layout"
-                android:background="@drawable/rounded_corners_location"
+                android:background="@drawable/rounded_corners_badges"
                 android:padding="10dp">
 
                 <ImageView

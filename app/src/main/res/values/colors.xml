@@ -56,6 +56,19 @@
 
     <color name="semi_transp">#80FFFFFF</color>
     <color name="eighty_percent_transp">#955C5C5C</color>
+    <color name="ninenty_percent_transp">#E95C5C5C</color>
+    <color name="eight_five_percent_transp">#D85C5C5C</color>
     <color name="teal_200_transp">#B403DAC5</color>
+    <color name="teal_200_darker_transp">#B404BDAB</color>
+
+    <color name="pokemon_red_bright">#B2FE0000</color>
+    <color name="pokemon_red_dark">#B2CB0000</color>
+
+    <color name="teal_200_ninety">#D903DAC5</color>
+    <color name="indigo_ninety">#D96C79DB</color>
+    <color name="lightPurple_ninety">#D99F5BBA</color>
+    <color name="green_ninety">#D9008000</color>
+    <color name="lightBlue_ninety">#D958ABF6</color>
+    <color name="brown_ninety">#D9B1736C</color>
 
 </resources>

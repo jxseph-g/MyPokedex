@@ -19,7 +19,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         tools:text="Indigo Plateau"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/lightGrey"
         android:textSize="25dp" />
 
 

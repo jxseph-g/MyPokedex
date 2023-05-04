@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:backgroundTint="@color/teal_200"
+                    android:backgroundTint="@color/teal_200_ninety"
                     android:padding="20dp"
                     android:text="Pokedex" />
 
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:backgroundTint="@color/indigo"
+                    android:backgroundTint="@color/indigo_ninety"
                     android:padding="20dp"
                     android:text="All Locations" />
 
@@ -107,7 +107,7 @@
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
-                    android:backgroundTint="@color/lightPurple"
+                    android:backgroundTint="@color/lightPurple_ninety"
                     android:padding="20dp"
                     android:text="Badges" />
 
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:backgroundTint="@color/green"
+                    android:backgroundTint="@color/green_ninety"
                     android:padding="20dp"
                     android:text="Type Charts" />
 
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:backgroundTint="@color/lightBlue"
+                    android:backgroundTint="@color/lightBlue_ninety"
                     android:padding="20dp"
                     android:text="My Favorites" />
 
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:backgroundTint="@color/brown"
+                    android:backgroundTint="@color/brown_ninety"
                     android:padding="20dp"
                     android:text="Trainer Info" />
 

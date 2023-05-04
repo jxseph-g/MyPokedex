@@ -6,8 +6,10 @@
         </shape>
     </item>
     <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="10dp" />/>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <corners android:radius="13dp" />
+            <solid android:color="@color/eighty_percent_transp" />
         </shape>
     </item>
 </selector>
