@@ -100,7 +100,7 @@
                     android:text="All Locations" />
 
                 <Button
-                    android:id="@+id/team_button"
+                    android:id="@+id/badges_button"
                     android:background="@drawable/button_rounded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                     android:text="Badges" />
 
                 <Button
-                    android:id="@+id/abilities_button"
+                    android:id="@+id/type_charts_button"
                     android:background="@drawable/button_rounded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
                     android:text="Type Charts" />
 
                 <Button
-                    android:id="@+id/type_charts_button"
+                    android:id="@+id/favorites_button"
                     android:background="@drawable/button_rounded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                     android:text="My Favorites" />
 
                 <Button
-                    android:id="@+id/trainer_card"
+                    android:id="@+id/trainer_card_button"
                     android:background="@drawable/button_rounded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

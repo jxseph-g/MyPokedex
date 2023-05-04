@@ -84,6 +84,20 @@ class MainFragment : Fragment() {
             transaction.commit()
         }
 
+        //"Gym Badges" to display the 6 Gym Badges out of Gen 1
+        binding.badgesButton.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
+            transaction.replace(R.id.fragment_container, GymBadgesFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         //Add more buttons below...
     }
 
