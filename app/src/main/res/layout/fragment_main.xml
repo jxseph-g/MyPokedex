@@ -10,10 +10,10 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/eighty_percent_transp">
+        android:backgroundTint="@color/eighty_percent_transp"
+        android:orientation="vertical"
+        android:paddingBottom="11dp">
 
         <ImageView
             android:id="@+id/pokemon_header_image"
@@ -31,12 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="-80dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="30dp"
             android:text="Hello, Trainer"
             android:textColor="@color/lightGrey"
             android:textSize="32sp"
-            android:textStyle="bold"
-            android:paddingTop="30dp"
-            android:paddingLeft="10dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -46,106 +46,97 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/app_bar_layout"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp">
 
-    <androidx.appcompat.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/eighty_percent_transp"
-        android:textColor="@android:color/darker_gray"
-        app:iconifiedByDefault="false"
-        app:queryHint="Enter a Pokemon name or ID"/>
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded"
+            android:backgroundTint="@color/eighty_percent_transp"
+            android:textColor="@android:color/darker_gray"
+            app:iconifiedByDefault="false"
+            app:queryHint="Enter a Pokemon name or ID" />
 
     </LinearLayout>
     <!-- Buttons section -->
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_bar_pkmn"
+        android:orientation="vertical"
+        android:paddingTop="0dp">
+
+        <GridLayout
+            android:id="@+id/buttons_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/search_bar_pkmn"
-            android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:layout_below="@+id/app_bar_layout"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:padding="0dp"
+            android:rowCount="3"
+            android:useDefaultMargins="true">
 
-            <GridLayout
-                android:id="@+id/buttons_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/app_bar_layout"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:padding="0dp"
-                android:rowCount="3"
-                android:useDefaultMargins="true">
+            <Button
+                android:id="@+id/pokedex_button"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_rowWeight="0"
+                android:layout_columnSpan="2"
+                android:layout_columnWeight="2"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/teal_200_ninety"
+                android:padding="20dp"
+                android:text="Pokedex" />
 
-                <Button
-                    android:id="@+id/pokedex_button"
-                    android:background="@drawable/button_rounded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:backgroundTint="@color/teal_200_ninety"
-                    android:padding="20dp"
-                    android:text="Pokedex" />
+            <Button
+                android:id="@+id/locations_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="2"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/indigo_ninety"
+                android:padding="20dp"
+                android:text="All Locations" />
 
-                <Button
-                    android:id="@+id/locations_button"
-                    android:background="@drawable/button_rounded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:backgroundTint="@color/indigo_ninety"
-                    android:padding="20dp"
-                    android:text="All Locations" />
+            <Button
+                android:id="@+id/badges_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="2"
+                android:layout_gravity="fill_horizontal"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/lightPurple_ninety"
+                android:padding="20dp"
+                android:text="Badges" />
 
-                <Button
-                    android:id="@+id/badges_button"
-                    android:background="@drawable/button_rounded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_gravity="fill_horizontal"
-                    android:backgroundTint="@color/lightPurple_ninety"
-                    android:padding="20dp"
-                    android:text="Badges" />
+            <Button
+                android:id="@+id/type_charts_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="2"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/green_ninety"
+                android:padding="20dp"
+                android:text="Type Charts" />
 
-                <Button
-                    android:id="@+id/type_charts_button"
-                    android:background="@drawable/button_rounded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:backgroundTint="@color/green_ninety"
-                    android:padding="20dp"
-                    android:text="Type Charts" />
+            <Button
+                android:id="@+id/trainer_card_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="2"
+                android:background="@drawable/button_rounded"
+                android:backgroundTint="@color/brown_ninety"
+                android:padding="20dp"
+                android:text="Trainer Info" />
 
-                <Button
-                    android:id="@+id/favorites_button"
-                    android:background="@drawable/button_rounded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:backgroundTint="@color/lightBlue_ninety"
-                    android:padding="20dp"
-                    android:text="My Favorites" />
+        </GridLayout>
 
-                <Button
-                    android:id="@+id/trainer_card_button"
-                    android:background="@drawable/button_rounded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:backgroundTint="@color/brown_ninety"
-                    android:padding="20dp"
-                    android:text="Trainer Info" />
-
-            </GridLayout>
-
-        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

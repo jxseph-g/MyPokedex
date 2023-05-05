@@ -3,25 +3,19 @@ package ch.hslu.mobpro.mypokedex.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import ch.hslu.mobpro.mypokedex.R
-import ch.hslu.mobpro.mypokedex.databinding.FragmentGymBadgesBinding
-import ch.hslu.mobpro.mypokedex.databinding.FragmentMainBinding
 import ch.hslu.mobpro.mypokedex.databinding.FragmentTrainerCardBinding
-import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
-class GymBadgesFragment : Fragment() {
 
-    private var _binding: FragmentGymBadgesBinding? = null
+class TrainerCardFragment : Fragment() {
+    private var _binding: FragmentTrainerCardBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -31,6 +25,7 @@ class GymBadgesFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var trainerName: String? = null
+    private var trainerID: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +34,6 @@ class GymBadgesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -48,12 +42,20 @@ class GymBadgesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentGymBadgesBinding.inflate(inflater, container, false)
-
+        _binding = FragmentTrainerCardBinding.inflate(inflater, container, false)
         // Initialize shared preferences
         sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
         trainerName = sharedPreferences.getString("trainer_name", null)
+        trainerID = sharedPreferences.getString("trainer_id", null)
+
+        if (trainerID == null) {
+            //trainer ID is not saved in shared preferences, generate and save it
+            val random = Random()
+            val newTrainerID = String.format("%05d", random.nextInt(100000))
+            binding.idTrainer.text = newTrainerID
+            editor.putString("trainer_id", newTrainerID).apply()
+        }
 
         return binding.root
     }
@@ -65,46 +67,38 @@ class GymBadgesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //here you should also LATER load the name from trainer card and display it here ...
         if (trainerName != null) {
-            binding.name.setText(trainerName)
+            binding.nameInput.setText(trainerName)
+        }
+
+        //TRAINERID
+
+        if (trainerID != null) {
+            //trainer ID is already saved in shared preferences, use it
+            binding.idTrainer.text = trainerID
+        } else {
+
         }
 
         //add time
         val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
         binding.time.text = currentTime
 
-        //BASE URL
-        //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/$id.png
-
-        //Load pokemon nr with randomNr with Picasso
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/1.png")
-            .into(binding.badge1)
-
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/2.png")
-            .into(binding.badge2)
-
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/3.png")
-            .into(binding.badge3)
-
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/4.png")
-            .into(binding.badge4)
-
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/5.png")
-            .into(binding.badge5)
-
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/6.png")
-            .into(binding.badge6)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        //get reference from input name
+        val refNewTrainerName = binding.nameInput
+
+        //retrieve proper text from it
+        val newTrainerName = refNewTrainerName.text.toString()
+
+        if (trainerName == null || trainerName != newTrainerName) {
+            //save the name to shared prefs
+            editor.putString("trainer_name", newTrainerName).apply()
+        }
         _binding = null
     }
 
