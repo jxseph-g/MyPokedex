@@ -72,7 +72,6 @@ class PokedexFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize the adapter and set the layout manager outside the collect block
         adapter = PokemonListAdapter(emptyList())
         binding.pokemonList.adapter = adapter
         binding.pokemonList.layoutManager = LinearLayoutManager(requireContext())
@@ -103,9 +102,6 @@ class PokedexFragment : Fragment() {
                             transaction.commit()
                         }
                     })
-
-                    // Update the text to display the number of loaded Pokémon
-                    //binding.pokemonNr.text = "#" + if (pokemons.isEmpty()) 0 else pokemons.size
                 }
             }
         }

@@ -48,7 +48,8 @@ class PokeViewModel : ViewModel() {
     //locationFlow: A public read-only Flow object that exposes the list of Location objects to the UI components.
     val locationFlow: Flow<List<PokeApiService.Location>> = _locationFlow
 
-    private val _pokemonDetailsFlow: MutableStateFlow<PokeApiService.Pokemon?> = MutableStateFlow(null)
+    private val _pokemonDetailsFlow: MutableStateFlow<PokeApiService.Pokemon?> =
+        MutableStateFlow(null)
 
     val pokemonDetailsFlow: Flow<PokeApiService.Pokemon?> = _pokemonDetailsFlow
 
@@ -58,6 +59,13 @@ class PokeViewModel : ViewModel() {
     fun requestPokeList() {
         viewModelScope.launch {
             val pokemons = getPokeListFromServer()
+            pokemons?.let { _pokeFlow.emit(pokemons) }
+        }
+    }
+
+    fun requestFavoritesPokeList(ids: List<Int>) {
+        viewModelScope.launch {
+            val pokemons = getPokemonListById(ids)
             pokemons?.let { _pokeFlow.emit(pokemons) }
         }
     }
@@ -83,6 +91,21 @@ class PokeViewModel : ViewModel() {
             } else {
                 null
             }
+        }
+    }
+
+    //API Call for the TrainerCard to only get Chosen Pokemon
+    private suspend fun getPokemonListById(ids: List<Int>): List<PokeApiService.Pokemon> {
+        return withContext(Dispatchers.IO) {
+            val pokemonList = mutableListOf<PokeApiService.Pokemon>()
+            for (id in ids) {
+                val response = pokeService.getPokemonDetails(id)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    val pokemon = response.body()
+                    pokemonList.add(pokemon!!)
+                }
+            }
+            pokemonList
         }
     }
 
