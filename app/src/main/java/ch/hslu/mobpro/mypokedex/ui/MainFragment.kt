@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import ch.hslu.mobpro.mypokedex.R
 import ch.hslu.mobpro.mypokedex.databinding.FragmentMainBinding
@@ -55,6 +56,23 @@ class MainFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Hide buttons when text is entered in the searchView
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (!newText.isNullOrBlank()) {
+                    binding.buttonsGrid.visibility = View.GONE
+                } else {
+                    binding.buttonsGrid.visibility = View.VISIBLE
+                }
+                return true
+            }
+
+        })
 
         // "Pokedex" Button - opens the full pokedex view --> PokedexFragment.kt
         binding.pokedexButton.setOnClickListener {

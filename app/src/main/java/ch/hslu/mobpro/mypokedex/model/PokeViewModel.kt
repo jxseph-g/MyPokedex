@@ -38,6 +38,7 @@ class PokeViewModel : ViewModel() {
         MutableStateFlow(emptyList())
 
     //pokeFlow: A public read-only Flow object that exposes the list of Pokemon objects to the UI components.
+    //everytime _pokeFlow gets updated, the UI gets notified
     val pokeFlow: Flow<List<PokeApiService.Pokemon>> = _pokeFlow
 
     //Location List GEN 1
@@ -79,11 +80,14 @@ class PokeViewModel : ViewModel() {
 
     //API Call to get the list of pokemon
     private suspend fun getPokeListFromServer(): List<PokeApiService.Pokemon>? {
+        //The block inside withContext will run on background Thread - not blocking main thread
         return withContext(Dispatchers.IO) {
             val response = pokeService.getPokemonList(151)
             if (response.code() == HttpURLConnection.HTTP_OK) {
+                //if HTTP_OK then get the whole response.body = the whole json and iterate over it
                 val pokemonListResponse = response.body()
                 pokemonListResponse?.pokemonList?.forEach { pokemon ->
+                    //"https://pokeapi.co/api/v2/pokemon/1/" --> get the 7th substring with get(6)
                     var id = pokemon.url?.split("/")?.get(6)?.toInt()
                     pokemon.id = id
                 }

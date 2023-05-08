@@ -54,6 +54,7 @@ class GymBadgesFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
         trainerName = sharedPreferences.getString("trainer_name", null)
+        //sharedPreferences.getStringSet()
 
         return binding.root
     }
