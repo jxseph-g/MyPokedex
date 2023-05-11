@@ -330,7 +330,22 @@
                 tools:text="0"/>
         </LinearLayout>
 
+
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/set_favorite_floating_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="set Favorite Pokemon"
+        android:src="@drawable/baseline_star_24"
+        android:backgroundTint="@color/teal_200_transp"/>
 
 </RelativeLayout>

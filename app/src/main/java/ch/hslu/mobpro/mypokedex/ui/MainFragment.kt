@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,6 @@ class MainFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var trainerName: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -71,7 +71,10 @@ class MainFragment : Fragment() {
 
         //load up and display trainer name, if empty, then "Hello, Trainer!"
         if (trainerName != null) {
-            binding.trainerName.setText(trainerName)
+            var trainerNameFormatted = trainerName.toString()
+            trainerNameFormatted = trainerNameFormatted.toLowerCase()
+            trainerNameFormatted = trainerNameFormatted.capitalize()
+            binding.trainerName.setText(trainerNameFormatted)
         } else {
             binding.trainerName.text ="Trainer"
         }
