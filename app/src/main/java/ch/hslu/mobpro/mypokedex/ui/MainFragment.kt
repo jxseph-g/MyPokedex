@@ -1,6 +1,8 @@
 package ch.hslu.mobpro.mypokedex.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,10 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var dialogBuilder: AlertDialog? = null
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private var trainerName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,12 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+
+        // Initialize shared preferences
+        sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+        trainerName = sharedPreferences.getString("trainer_name", null)
+
         return binding.root
     }
 
@@ -56,6 +68,13 @@ class MainFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //load up and display trainer name, if empty, then "Hello, Trainer!"
+        if (trainerName != null) {
+            binding.trainerName.setText(trainerName)
+        } else {
+            binding.trainerName.text ="Trainer"
+        }
 
         //Hide buttons when text is entered in the searchView
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{

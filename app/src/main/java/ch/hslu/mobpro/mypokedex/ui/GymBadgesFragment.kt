@@ -66,9 +66,11 @@ class GymBadgesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //here you should also LATER load the name from trainer card and display it here ...
+        //load up and display trainer name, if empty, then "Hello, Trainer!"
         if (trainerName != null) {
             binding.name.setText(trainerName)
+        } else {
+            binding.name.text ="TRAINER"
         }
 
         //add time
