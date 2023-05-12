@@ -26,6 +26,9 @@ class MainFragment : Fragment() {
 
     private var dialogBuilder: AlertDialog? = null
 
+    //On App start, create a random number to display a random pokemon picture on the home screen
+    var randomNr = Random.nextInt(1, 152)
+
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var trainerName: String? = null
@@ -37,13 +40,33 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        //On App start, create a random number to display a random pokemon picture on the home screen
-        var randomNr = Random.nextInt(1, 152)
+        // Initialize shared preferences
+        sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+        trainerName = sharedPreferences.getString("trainer_name", null)
 
-        //Load pokemon nr with randomNr with Picasso
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$randomNr.png")
-            .into(binding.pokemonHeaderImage)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Initialize shared preferences
+        sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+        trainerName = sharedPreferences.getString("trainer_name", null)
+
+        //load up and display trainer name, if empty, then "Hello, Trainer!"
+        //TODO: It still does not re-read the name when you re-enter from Trainer Info
+        if (trainerName != null) {
+            var trainerNameFormatted = trainerName.toString()
+            trainerNameFormatted = trainerNameFormatted.toLowerCase()
+            trainerNameFormatted = trainerNameFormatted.capitalize()
+            binding.trainerName.setText(trainerNameFormatted)
+        } else if (trainerName.isNullOrBlank()){
+            binding.trainerName.text ="Trainer"
+        } else {
+            binding.trainerName.text ="Trainer"
+        }
     }
 
     override fun onCreateView(
@@ -53,12 +76,6 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-
-        // Initialize shared preferences
-        sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        trainerName = sharedPreferences.getString("trainer_name", null)
-
         return binding.root
     }
 
@@ -69,15 +86,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //load up and display trainer name, if empty, then "Hello, Trainer!"
-        if (trainerName != null) {
-            var trainerNameFormatted = trainerName.toString()
-            trainerNameFormatted = trainerNameFormatted.toLowerCase()
-            trainerNameFormatted = trainerNameFormatted.capitalize()
-            binding.trainerName.setText(trainerNameFormatted)
-        } else {
-            binding.trainerName.text ="Trainer"
-        }
+        //Load pokemon nr with randomNr with Picasso
+        Picasso.get()
+            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$randomNr.png")
+            .into(binding.pokemonHeaderImage)
 
         //Hide buttons when text is entered in the searchView
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
