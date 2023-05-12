@@ -1,9 +1,13 @@
 package ch.hslu.mobpro.firstpokedex.model
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import ch.hslu.mobpro.mypokedex.R
 import ch.hslu.mobpro.mypokedex.databinding.ListItemPokemonBinding
 import ch.hslu.mobpro.mypokedex.network.PokeApiService
 import com.squareup.picasso.Picasso
@@ -18,6 +22,8 @@ class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) 
 
     private lateinit var mListener : onItemClickListener
 
+    private var favoriteList: MutableList<String> = mutableListOf()
+
     //interface for click listener in adapter class
     interface onItemClickListener {
         fun onItemClick(position: Int)
@@ -30,6 +36,12 @@ class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemPokemonBinding.inflate(inflater, parent, false)
+
+        // Initialize shared preferences
+        val sharedPreferences =
+            parent.context.getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
+        favoriteList = sharedPreferences.getStringSet("favoriteList", setOf<String>())?.toMutableList() ?: mutableListOf()
+
         return PokemonViewHolder(binding, mListener)
     }
 
@@ -62,6 +74,15 @@ class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) 
 
             // Format the Pokedex ID with leading zeros
             val pokedexId = pokemon.id?.toString()?.padStart(3, '0')
+
+            //check if Pokemon is already in the favorites
+            var isFavorite = favoriteList.contains(pokemon.id?.toString())
+
+            if (isFavorite){
+                binding.favoriteStar.visibility = View.VISIBLE
+            } else if (!isFavorite) {
+                binding.favoriteStar.visibility = View.GONE
+            }
 
             binding.pokemonName.text = name
             binding.pokedexNr.text = pokedexId

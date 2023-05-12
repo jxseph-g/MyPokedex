@@ -1,11 +1,14 @@
 package ch.hslu.mobpro.mypokedex.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -15,9 +18,12 @@ import ch.hslu.mobpro.mypokedex.R
 import ch.hslu.mobpro.mypokedex.databinding.FragmentPokemonDetailBinding
 import ch.hslu.mobpro.mypokedex.model.PokeViewModel
 import ch.hslu.mobpro.mypokedex.model.PokemonDetailViewModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 /*
 PokemonDetailFragment -> This class should load all the relevant information from
@@ -28,10 +34,12 @@ class PokemonDetailFragment : Fragment() {
     private val viewModel: PokemonDetailViewModel by activityViewModels()
     private val pokeViewModel: PokeViewModel by viewModels()
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private var favoriteList: MutableList<String> = mutableListOf()
 
     private var _binding: FragmentPokemonDetailBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +50,16 @@ class PokemonDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // Initialize shared preferences
+        sharedPreferences = requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+        favoriteList =
+            sharedPreferences.getStringSet("favoriteList", setOf<String>())?.toMutableList() ?: mutableListOf()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,8 +67,18 @@ class PokemonDetailFragment : Fragment() {
 
             // Extract Pokemon ID
             val pokemonId = pokemon.id ?: return@Observer
+            val pokemonIdString = pokemonId.toString()
 
-            // Request Pokemon details = details such as types and also species / description text
+            //check if Pokemon is already in the favorites
+            var isFavorite = favoriteList.contains(pokemonIdString)
+
+            if (isFavorite){
+                binding.setFavoriteFloatingButton.setImageResource(R.drawable.baseline_star_24)
+            } else if (!isFavorite) {
+                binding.setFavoriteFloatingButton.setImageResource(R.drawable.baseline_star_border_24)
+            }
+
+                // Request Pokemon details = details such as types and also species / description text
             lifecycleScope.launch {
                 val fullPokemon = pokeViewModel.getPokemonDetails(pokemonId)
                 val pokemonSpecies = pokeViewModel.getPokemonSpecies(pokemonId)
@@ -133,6 +161,24 @@ class PokemonDetailFragment : Fragment() {
             binding.pokemonNumber.text = pokedexId
             Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png")
                 .into(binding.pokemonImage)
+
+            binding.setFavoriteFloatingButton.setOnClickListener {
+                if(!isFavorite){
+                    favoriteList.add(pokemonIdString)
+                    isFavorite = true
+                    binding.setFavoriteFloatingButton.setImageResource(R.drawable.baseline_star_24)
+                    val toastMessage = "Pokémon added to favorites"
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
+                    editor.putStringSet("favoriteList", favoriteList.toSet()).apply()
+                } else if (isFavorite) {
+                    favoriteList.remove(pokemonIdString)
+                    isFavorite = false
+                    binding.setFavoriteFloatingButton.setImageResource(R.drawable.baseline_star_border_24)
+                    val toastMessage = "Pokémon removed from favorites"
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
+                    editor.putStringSet("favoriteList", favoriteList.toSet()).apply()
+                }
+            }
         })
     }
 

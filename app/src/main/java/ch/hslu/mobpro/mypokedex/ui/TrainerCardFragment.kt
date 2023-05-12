@@ -34,9 +34,6 @@ class TrainerCardFragment : Fragment() {
 
     private var dialogBuilder: AlertDialog? = null
 
-    //CREATE FAKE FAVORITE LIST
-    private val favoritePokemonIds = listOf(1, 4, 7, 25, 151)
-
     private val detailViewModel: PokemonDetailViewModel by activityViewModels()
     private val pokeViewModel: PokeViewModel by viewModels()
 
@@ -45,6 +42,7 @@ class TrainerCardFragment : Fragment() {
     private lateinit var editor: SharedPreferences.Editor
     private var trainerName: String? = null
     private var trainerID: String? = null
+    private var favoriteList: MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,7 @@ class TrainerCardFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        pokeViewModel.requestFavoritesPokeList(favoritePokemonIds)
+        //pokeViewModel.requestFavoritesPokeList(favoriteList)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -74,6 +72,14 @@ class TrainerCardFragment : Fragment() {
         editor = sharedPreferences.edit()
         trainerName = sharedPreferences.getString("trainer_name", null)
         trainerID = sharedPreferences.getString("trainer_id", null)
+        favoriteList = sharedPreferences.getStringSet("favoriteList", setOf<String>())?.toMutableList() ?: mutableListOf()
+
+        val integerFavoriteList = mutableListOf<Int>()
+        for (string in favoriteList) {
+            val intValue = string.toInt()
+            integerFavoriteList.add(intValue)
+        }
+        pokeViewModel.requestFavoritesPokeList(integerFavoriteList)
 
         //if no trainerID yet, create and save one
         if (trainerID == null) {
@@ -85,10 +91,9 @@ class TrainerCardFragment : Fragment() {
         }
 
         //show number of favorites in the fragment
-        binding.numberFavorites.text = favoritePokemonIds.size.toString()
+        binding.numberFavorites.text = integerFavoriteList.size.toString()
 
         //Loads favorites from a list
-        //TODO FAKE FAVORITE LIST !!  CHANGE
         getFavoritePokemon()
 
         return binding.root

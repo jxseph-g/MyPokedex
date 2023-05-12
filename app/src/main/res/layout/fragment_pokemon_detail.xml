@@ -345,7 +345,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="set Favorite Pokemon"
-        android:src="@drawable/baseline_star_24"
+        android:src="@drawable/baseline_star_border_24"
         android:backgroundTint="@color/teal_200_transp"/>
 
 </RelativeLayout>

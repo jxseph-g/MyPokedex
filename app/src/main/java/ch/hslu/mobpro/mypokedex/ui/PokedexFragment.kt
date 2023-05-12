@@ -2,6 +2,7 @@ package ch.hslu.mobpro.mypokedex.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,10 @@ class PokedexFragment : Fragment() {
     private val pokeViewModel: PokeViewModel by viewModels()
 
     private val detailViewModel: PokemonDetailViewModel by activityViewModels()
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private var favoriteList: MutableList<String> = mutableListOf()
 
     private var _binding: FragmentPokedexBinding? = null
 
