@@ -32,6 +32,9 @@ interface PokeApiService {
     @GET("pokemon-species/{id}")
     suspend fun getPokemonSpecies(@Path("id") id: Int): Response<PokemonSpecies>
 
+    @GET("type")
+    suspend fun getTypeList(@Query("limit") limit: Int): Response<TypeListResponse>
+
     //POKEMON
     data class Pokemon(
 
@@ -80,7 +83,13 @@ interface PokeApiService {
         val type: TypeDetails
     )
 
+    data class TypeListResponse(
+        @SerializedName("results")
+        val typesList: List<TypeDetails>
+    )
+
     data class TypeDetails(
+        var id: Int,
         @SerializedName("name")
         val name: String,
         @SerializedName("url")

@@ -36,10 +36,6 @@ class PokedexFragment : Fragment() {
 
     private val detailViewModel: PokemonDetailViewModel by activityViewModels()
 
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
-    private var favoriteList: MutableList<String> = mutableListOf()
-
     private var _binding: FragmentPokedexBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.

@@ -164,8 +164,19 @@ class MainFragment : Fragment() {
             transaction.commit()
         }
 
-
-        //Add more buttons below...
+        //"Type Charts Button"
+        binding.typeChartsButton.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
+            transaction.replace(R.id.fragment_container, TypeChartFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     override fun onDestroyView() {

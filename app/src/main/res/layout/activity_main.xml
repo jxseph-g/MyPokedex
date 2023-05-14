@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.65"
+        android:alpha="0.35"
         android:scaleType="centerCrop"
         android:src="@drawable/pokedex_background2"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"

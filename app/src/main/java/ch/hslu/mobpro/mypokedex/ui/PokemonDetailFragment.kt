@@ -87,7 +87,7 @@ class PokemonDetailFragment : Fragment() {
 
                 //now extract types from json
                 if (types != null && types.size < 2) {
-                    val type1 = types?.getOrNull(0)
+                    val type1 = types.getOrNull(0)
                     val type1Color = getBackgroundColor(type1)
                     val type1ColorConv = getResources().getColor(type1Color)
                     binding.pokemonType2.text = type1
