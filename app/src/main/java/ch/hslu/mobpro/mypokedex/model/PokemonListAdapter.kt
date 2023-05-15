@@ -48,6 +48,9 @@ class PokemonListAdapter(private var pokemonList: List<PokeApiService.Pokemon>) 
     override fun getItemCount(): Int {
         return pokemonList.size
     }
+    fun getItem(position: Int): PokeApiService.Pokemon? {
+        return pokemonList.getOrNull(position)
+    }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val pokemon = pokemonList[position]
