@@ -34,6 +34,8 @@ class PokemonDetailFragment : Fragment() {
     private val viewModel: PokemonDetailViewModel by activityViewModels()
     private val pokeViewModel: PokeViewModel by viewModels()
 
+    private var clicked: Int = 0
+
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var favoriteList: MutableList<String> = mutableListOf()
@@ -161,6 +163,28 @@ class PokemonDetailFragment : Fragment() {
             binding.pokemonNumber.text = pokedexId
             Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png")
                 .into(binding.pokemonImage)
+
+            binding.pokemonImage.setOnClickListener {
+                clicked++
+                if(clicked == 4) {
+                    val toastMessage = "something is happening..."
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
+                    editor.putStringSet("favoriteList", favoriteList.toSet()).apply()
+                }
+                if(clicked == 9) {
+                    val toastMessage = "a few more..."
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
+                    editor.putStringSet("favoriteList", favoriteList.toSet()).apply()
+                }
+
+                if(clicked == 12) {
+                    val toastMessage = "unlocked shiny :)"
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
+                    editor.putStringSet("favoriteList", favoriteList.toSet()).apply()
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemon.id}.png")
+                        .into(binding.pokemonImage)
+                }
+            }
 
             binding.setFavoriteFloatingButton.setOnClickListener {
                 if(!isFavorite){
