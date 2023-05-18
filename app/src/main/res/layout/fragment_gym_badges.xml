@@ -89,7 +89,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="11dp">
 
             <FrameLayout
                 android:id="@+id/badge1_layout"
@@ -98,12 +99,12 @@
                 android:layout_below="@+id/trainer_card"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_corners_badges"
-                android:padding="10dp">
+                android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/badge1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge_1" />
@@ -116,12 +117,11 @@
                 android:layout_below="@id/badge1_layout"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_corners_badges"
-                android:padding="10dp">
-
+                android:padding="16dp">
                 <ImageView
                     android:id="@+id/badge2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge_1" />
@@ -134,12 +134,11 @@
                 android:layout_below="@id/badge2_layout"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_corners_badges"
-                android:padding="10dp">
-
+                android:padding="16dp">
                 <ImageView
                     android:id="@+id/badge3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge_1" />
@@ -152,12 +151,11 @@
                 android:layout_below="@id/badge3_layout"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_corners_badges"
-                android:padding="10dp">
-
+                android:padding="16dp">
                 <ImageView
                     android:id="@+id/badge4"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge_1" />
@@ -170,12 +168,11 @@
                 android:layout_below="@id/badge4_layout"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_corners_badges"
-                android:padding="10dp">
-
+                android:padding="16dp">
                 <ImageView
                     android:id="@+id/badge5"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge_1" />
@@ -187,12 +184,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/badge5_layout"
                 android:background="@drawable/rounded_corners_badges"
-                android:padding="10dp">
-
+                android:padding="16dp">
                 <ImageView
                     android:id="@+id/badge6"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge_1" />

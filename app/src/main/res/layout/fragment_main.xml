@@ -37,7 +37,7 @@
                 android:id="@+id/trainer_greeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello, "
+                tools:text="Good"
                 android:textColor="@color/lightGrey"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -46,7 +46,7 @@
                 android:id="@+id/trainer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Trainer"
+                tools:text=" Morning!"
                 android:textColor="@color/lightGrey"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -72,7 +72,7 @@
             android:backgroundTint="@color/eighty_percent_transp"
             android:textColor="@android:color/darker_gray"
             app:iconifiedByDefault="false"
-            app:queryHint="Enter a Pokemon name or ID" />
+            app:queryHint="Enter Pokemon Name" />
 
     </LinearLayout>
     <!-- Buttons section -->

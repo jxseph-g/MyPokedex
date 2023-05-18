@@ -79,6 +79,7 @@ class TrainerCardFragment : Fragment() {
             val intValue = string.toInt()
             integerFavoriteList.add(intValue)
         }
+        integerFavoriteList.sort()
         pokeViewModel.requestFavoritesPokeList(integerFavoriteList)
 
         //if no trainerID yet, create and save one
@@ -122,6 +123,12 @@ class TrainerCardFragment : Fragment() {
         //add time
         val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
         binding.time.text = currentTime
+
+        //get reference from input name
+        val refNewTrainerName = binding.nameInput
+
+        //retrieve proper text from it
+        val newTrainerName = refNewTrainerName.text.toString()
 
     }
 

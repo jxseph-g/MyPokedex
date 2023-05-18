@@ -27,6 +27,7 @@ import ch.hslu.mobpro.mypokedex.ui.PokedexFragment
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.time.LocalTime
 import kotlin.random.Random
 
 class MainFragment : Fragment() {
@@ -38,6 +39,7 @@ class MainFragment : Fragment() {
 
     private val pokeViewModel: PokeViewModel by viewModels()
     private val detailViewModel: PokemonDetailViewModel by activityViewModels()
+
     private var pokemonListForSearch: List<PokeApiService.Pokemon>? = emptyList()
     private lateinit var adapter: PokemonListAdapter
 
@@ -67,24 +69,6 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        // Initialize shared preferences
-        sharedPreferences =
-            requireActivity().getSharedPreferences("pokedex_preferencesTEST", Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        trainerName = sharedPreferences.getString("trainer_name", null)
-
-        //load up and display trainer name, if empty, then "Hello, Trainer!"
-        //TODO: It still does not re-read the name when you re-enter from Trainer Info
-        if (trainerName != null) {
-            var trainerNameFormatted = trainerName.toString()
-            trainerNameFormatted = trainerNameFormatted.toLowerCase()
-            trainerNameFormatted = trainerNameFormatted.capitalize()
-            binding.trainerName.setText(trainerNameFormatted)
-        } else if (trainerName.isNullOrBlank()) {
-            binding.trainerName.text = "Trainer"
-        } else {
-            binding.trainerName.text = "Trainer"
-        }
     }
 
     override fun onCreateView(
@@ -120,6 +104,9 @@ class MainFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val currentTimeText = getDayTimeText()
+        binding.trainerName.text = currentTimeText
 
         //Load pokemon nr with randomNr with Picasso
         Picasso.get()
@@ -258,6 +245,25 @@ class MainFragment : Fragment() {
         adapter.updateData(filteredList ?: emptyList())
     }
 
+    fun getCurrentTime(): LocalTime {
+        return LocalTime.now()
+    }
+
+    fun getDayTimeText(): String {
+        val currentTime = getCurrentTime()
+        val startMorningTime = LocalTime.of(4, 59)
+        val startAfternoonTime = LocalTime.of(12,59)
+        val startEveningTime = LocalTime.of(16,59)
+
+        if (currentTime.isBefore(startMorningTime) && currentTime.isAfter(startEveningTime)) {
+            return "Good Evening!"
+        } else if (currentTime.isBefore(startAfternoonTime) && currentTime.isAfter(startMorningTime)) {
+            return "Good Morning!"
+        } else if (currentTime.isBefore(startEveningTime) && currentTime.isAfter(startAfternoonTime)) {
+            return "Good Afternoon!"
+        } else
+            return "Hello, Trainer!"
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
