@@ -253,16 +253,17 @@ class MainFragment : Fragment() {
         val currentTime = getCurrentTime()
         val startMorningTime = LocalTime.of(4, 59)
         val startAfternoonTime = LocalTime.of(12,59)
-        val startEveningTime = LocalTime.of(16,59)
+        val startEveningTime = LocalTime.of(17,59)
 
-        if (currentTime.isBefore(startMorningTime) && currentTime.isAfter(startEveningTime)) {
-            return "Good Evening!"
-        } else if (currentTime.isBefore(startAfternoonTime) && currentTime.isAfter(startMorningTime)) {
+        if (currentTime.isAfter(startMorningTime) && currentTime.isBefore(startAfternoonTime)) {
             return "Good Morning!"
-        } else if (currentTime.isBefore(startEveningTime) && currentTime.isAfter(startAfternoonTime)) {
+        } else if (currentTime.isAfter(startAfternoonTime) && currentTime.isBefore(startEveningTime)) {
             return "Good Afternoon!"
-        } else
+        } else if (currentTime.isAfter(startEveningTime) || currentTime.isBefore(startMorningTime)) {
+            return "Good Evening!"
+        } else {
             return "Hello, Trainer!"
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
