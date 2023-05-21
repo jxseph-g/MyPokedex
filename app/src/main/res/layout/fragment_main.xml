@@ -83,6 +83,15 @@
         android:orientation="vertical"
         android:paddingTop="0dp">
 
+        <TextView
+            android:id="@+id/no_internet_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO INTERNET CONNECTION :("
+            android:gravity="center"
+            android:textSize="35dp"
+            android:paddingTop="70dp"></TextView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSearch"
             android:layout_width="wrap_content"

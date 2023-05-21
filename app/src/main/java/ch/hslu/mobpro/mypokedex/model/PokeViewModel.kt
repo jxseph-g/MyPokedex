@@ -55,7 +55,8 @@ class PokeViewModel : ViewModel() {
     val pokemonDetailsFlow: Flow<PokeApiService.Pokemon?> = _pokemonDetailsFlow
 
     private val _typesFlow: MutableStateFlow<List<PokeApiService.TypeDetails>> = MutableStateFlow(
-        emptyList())
+        emptyList()
+    )
 
     val typesFlow: Flow<List<PokeApiService.TypeDetails>> = _typesFlow
 
@@ -91,14 +92,14 @@ class PokeViewModel : ViewModel() {
     suspend fun requestTypesList() {
         viewModelScope.launch {
             val types = getTypesListFromServer()
-            types?.let { _typesFlow.emit(types)}
+            types?.let { _typesFlow.emit(types) }
         }
     }
 
     fun requestMovesbyType(typeId: Int) {
         viewModelScope.launch {
             val moves = getMovesByTypeListFromServer(typeId)
-            moves?.let { _movesByTypeFlow.emit(moves)}
+            moves?.let { _movesByTypeFlow.emit(moves) }
         }
     }
 
@@ -106,17 +107,22 @@ class PokeViewModel : ViewModel() {
     private suspend fun getPokeListFromServer(): List<PokeApiService.Pokemon>? {
         //The block inside withContext will run on background Thread - not blocking main thread
         return withContext(Dispatchers.IO) {
-            val response = pokeService.getPokemonList(151)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                //if HTTP_OK then get the whole response.body = the whole json and iterate over it
-                val pokemonListResponse = response.body()
-                pokemonListResponse?.pokemonList?.forEach { pokemon ->
-                    //"https://pokeapi.co/api/v2/pokemon/1/" --> get the 7th substring with get(6)
-                    var id = pokemon.url?.split("/")?.get(6)?.toInt()
-                    pokemon.id = id
+            try {
+                val response = pokeService.getPokemonList(151)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    //if HTTP_OK then get the whole response.body = the whole json and iterate over it
+                    val pokemonListResponse = response.body()
+                    pokemonListResponse?.pokemonList?.forEach { pokemon ->
+                        //"https://pokeapi.co/api/v2/pokemon/1/" --> get the 7th substring with get(6)
+                        var id = pokemon.url?.split("/")?.get(6)?.toInt()
+                        pokemon.id = id
+                    }
+                    pokemonListResponse?.pokemonList
+                } else {
+                    emptyList()
                 }
-                pokemonListResponse?.pokemonList
-            } else {
+            } catch (e: Exception) {
+                Log.e("PokeViewModel", "Exception occurred while fetching Pokemon list", e)
                 null
             }
         }
@@ -127,23 +133,44 @@ class PokeViewModel : ViewModel() {
         return withContext(Dispatchers.IO) {
             val pokemonList = mutableListOf<PokeApiService.Pokemon>()
             for (id in ids) {
-                val response = pokeService.getPokemonDetails(id)
-                if (response.code() == HttpURLConnection.HTTP_OK) {
-                    val pokemon = response.body()
-                    pokemonList.add(pokemon!!)
+                try {
+                    val response = pokeService.getPokemonDetails(id)
+                    if (response.isSuccessful) {
+                        val pokemon = response.body()
+                        pokemon?.let { pokemonList.add(it) }
+                    } else {
+                        Log.e(
+                            "PokeViewModel",
+                            "Failed to fetch Pokemon details for id: $id. Error code: ${response.code()}"
+                        )
+                    }
+                } catch (e: Exception) {
+                    Log.e(
+                        "PokeViewModel",
+                        "Exception occurred while fetching Pokemon details for id: $id",
+                        e
+                    )
                 }
             }
             pokemonList
         }
     }
 
-    //API Call and Parsing json from one single Pokemon into Pokemon Object
     suspend fun getPokemonDetails(id: Int): PokeApiService.Pokemon? {
         return withContext(Dispatchers.IO) {
-            val response = pokeService.getPokemonDetails(id)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                response.body()
-            } else {
+            try {
+                val response = pokeService.getPokemonDetails(id)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    response.body()
+                } else {
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e(
+                    "PokeViewModel",
+                    "Exception occurred while fetching Pokemon details for id: $id",
+                    e
+                )
                 null
             }
         }
@@ -152,10 +179,19 @@ class PokeViewModel : ViewModel() {
     //API call to get pokemon species AKA pokemon description etc.
     suspend fun getPokemonSpecies(id: Int): PokeApiService.PokemonSpecies? {
         return withContext(Dispatchers.IO) {
-            val response = pokeService.getPokemonSpecies(id)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                response.body()
-            } else {
+            try {
+                val response = pokeService.getPokemonSpecies(id)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    response.body()
+                } else {
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e(
+                    "PokeViewModel",
+                    "Exception occurred while fetching Pokemon species for id: $id",
+                    e
+                )
                 null
             }
         }
@@ -164,47 +200,65 @@ class PokeViewModel : ViewModel() {
     //API call to get the list of locations
     private suspend fun getLocationListFromServer(regionId: Int): List<PokeApiService.Location>? {
         return withContext(Dispatchers.IO) {
-            val response = pokeService.getLocationList(1)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                val region = response.body()
-                region?.locations
-            } else {
-                null
-            }
-        }
-    }
-
-    private suspend fun getTypesListFromServer() : List<PokeApiService.TypeDetails>? {
-        //The block inside withContext will run on background Thread - not blocking main thread
-        return withContext(Dispatchers.IO) {
-            //Set delimiter to 14 to get all the 15 types from GEN1
-            val response = pokeService.getTypeList(14)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                //if HTTP_OK then get the whole response.body = the whole json and iterate over it
-                val typelistResponse = response.body()
-                typelistResponse?.typesList?.forEach { type ->
-                    //"https://pokeapi.co/api/v2/type/1/" --> get the 7th substring with get(6)
-                    var id = type.url?.split("/")?.get(6)?.toInt()
-                    if (id != null) {
-                        type.id = id
-                    }
+            try {
+                val response = pokeService.getLocationList(1)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    val region = response.body()
+                    region?.locations
+                } else {
+                    null
                 }
-                typelistResponse?.typesList
-            } else {
+            } catch (e: Exception) {
+                Log.e("PokeViewModel", "Exception occurred while fetching location list", e)
                 null
             }
         }
     }
 
-    private suspend fun getMovesByTypeListFromServer(typeId: Int) : List<PokeApiService.Move>? {
+    private suspend fun getTypesListFromServer(): List<PokeApiService.TypeDetails>? {
         return withContext(Dispatchers.IO) {
-            val response = pokeService.getMovesByTypeList(typeId)
-            if (response.code() == HttpURLConnection.HTTP_OK) {
-                val move = response.body()
-                Log.e("MovesByType", "Retrieved ${move?.movesListByType} moves")
-                move?.movesListByType
-            } else {
-                Log.e("Failed to retrieve moves by type. Error code: ${response.code()}", "Failed")
+            try {
+                val response = pokeService.getTypeList(14)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    val typelistResponse = response.body()
+                    typelistResponse?.typesList?.forEach { type ->
+                        val id = type.url?.split("/")?.get(6)?.toIntOrNull()
+                        if (id != null) {
+                            type.id = id
+                        }
+                    }
+                    typelistResponse?.typesList
+                } else {
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e("PokeViewModel", "Exception occurred while fetching types list", e)
+                null
+            }
+        }
+    }
+
+    private suspend fun getMovesByTypeListFromServer(typeId: Int): List<PokeApiService.Move>? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = pokeService.getMovesByTypeList(typeId)
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    val move = response.body()
+                    Log.e("MovesByType", "Retrieved ${move?.movesListByType} moves")
+                    move?.movesListByType
+                } else {
+                    Log.e(
+                        "Failed to retrieve moves by type. Error code: ${response.code()}",
+                        "Failed"
+                    )
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e(
+                    "PokeViewModel",
+                    "Exception occurred while fetching moves by type for typeId: $typeId",
+                    e
+                )
                 null
             }
         }

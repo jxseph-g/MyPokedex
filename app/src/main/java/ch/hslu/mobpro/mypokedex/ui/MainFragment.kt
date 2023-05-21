@@ -3,6 +3,7 @@ package ch.hslu.mobpro.mypokedex.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -69,6 +70,12 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        if (isNetworkAvailable()) {
+            binding.noInternetText.visibility = View.GONE
+        } else {
+            binding.noInternetText.visibility = View.VISIBLE
+            binding.buttonsGrid.visibility = View.GONE
+        }
     }
 
     override fun onCreateView(
@@ -270,4 +277,9 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
 }
