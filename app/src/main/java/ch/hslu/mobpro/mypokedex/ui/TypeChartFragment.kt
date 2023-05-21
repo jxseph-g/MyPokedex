@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,16 +17,18 @@ import ch.hslu.mobpro.firstpokedex.model.PokemonListAdapter
 import ch.hslu.mobpro.mypokedex.R
 import ch.hslu.mobpro.mypokedex.databinding.FragmentPokedexBinding
 import ch.hslu.mobpro.mypokedex.databinding.FragmentTypeChartBinding
-import ch.hslu.mobpro.mypokedex.model.LocationListAdapter
-import ch.hslu.mobpro.mypokedex.model.PokeViewModel
-import ch.hslu.mobpro.mypokedex.model.TypesListAdapter
+import ch.hslu.mobpro.mypokedex.model.*
 import kotlinx.coroutines.launch
+import java.lang.reflect.Type
 
 class TypeChartFragment : Fragment() {
 
     private lateinit var adapter: TypesListAdapter
 
     private val pokeViewModel: PokeViewModel by viewModels()
+
+    private val moveViewModel: MoveViewModel by activityViewModels()
+
 
     private var _binding: FragmentTypeChartBinding? = null
 
@@ -74,10 +77,30 @@ class TypeChartFragment : Fragment() {
                 pokeViewModel.typesFlow.collect { types ->
                     // Update the adapter's data instead of creating a new adapter each time
                     adapter.updateData(types)
+
+                    adapter.setOnItemClickListener(object : TypesListAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            // Handle item click
+                            val selectedType = types[position]
+                            moveViewModel.selectedType = selectedType.id
+
+                            // Navigate to PokemonDetailFragment
+                            val transaction = parentFragmentManager.beginTransaction()
+                            transaction.setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out
+                            )
+                            transaction.replace(R.id.fragment_container, MovesByTypeFragment())
+                            transaction.addToBackStack(null)
+                            transaction.commit()
+                        }
+                    })
                 }
             }
-        }
 
+        }
     }
 
     override fun onDestroyView() {

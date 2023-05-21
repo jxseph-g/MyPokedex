@@ -24,15 +24,28 @@ class TypesListAdapter(private val context: Context) :
 
     private var typeListResponse = emptyList<PokeApiService.TypeDetails>()
 
+    private lateinit var mListener : onItemClickListener
+
+    //interface for click listener in adapter class
+    interface onItemClickListener {
+        fun onItemClick(typeId: Int)
+    }
+
+    fun setOnItemClickListener(listener : onItemClickListener) {
+        mListener = listener
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemTypeBinding.inflate(inflater, parent, false)
-        return TypesViewHolder(binding)
+        return TypesViewHolder(binding, mListener)
     }
 
     override fun onBindViewHolder(holder: TypesListAdapter.TypesViewHolder, position: Int) {
         val type = typeListResponse[position]
         holder.bind(type)
+
     }
 
     override fun getItemCount(): Int {
@@ -45,8 +58,16 @@ class TypesListAdapter(private val context: Context) :
         notifyDataSetChanged()
     }
 
-    inner class TypesViewHolder(private val binding: ListItemTypeBinding) :
+    inner class TypesViewHolder(private val binding: ListItemTypeBinding, listener: onItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+                val typeId = typeListResponse[adapterPosition].id
+            }
+        }
+
         fun bind(type: PokeApiService.TypeDetails) {
             // Convert name to title case and remove hyphens
             val name = type.name.toString()

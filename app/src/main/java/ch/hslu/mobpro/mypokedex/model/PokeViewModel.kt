@@ -59,6 +59,12 @@ class PokeViewModel : ViewModel() {
 
     val typesFlow: Flow<List<PokeApiService.TypeDetails>> = _typesFlow
 
+    private val _movesByTypeFlow: MutableStateFlow<List<PokeApiService.Move>> = MutableStateFlow(
+        emptyList()
+    )
+
+    val moveByTypeFlow: Flow<List<PokeApiService.Move>> = _movesByTypeFlow
+
     //launch coroutine with viewModelScope to fetch list of Pokémon from server with getPokeListFromServer()
     //
     fun requestPokeList() {
@@ -86,6 +92,13 @@ class PokeViewModel : ViewModel() {
         viewModelScope.launch {
             val types = getTypesListFromServer()
             types?.let { _typesFlow.emit(types)}
+        }
+    }
+
+    fun requestMovesbyType(typeId: Int) {
+        viewModelScope.launch {
+            val moves = getMovesByTypeListFromServer(typeId)
+            moves?.let { _movesByTypeFlow.emit(moves)}
         }
     }
 
@@ -178,6 +191,20 @@ class PokeViewModel : ViewModel() {
                 }
                 typelistResponse?.typesList
             } else {
+                null
+            }
+        }
+    }
+
+    private suspend fun getMovesByTypeListFromServer(typeId: Int) : List<PokeApiService.Move>? {
+        return withContext(Dispatchers.IO) {
+            val response = pokeService.getMovesByTypeList(typeId)
+            if (response.code() == HttpURLConnection.HTTP_OK) {
+                val move = response.body()
+                Log.e("MovesByType", "Retrieved ${move?.movesListByType} moves")
+                move?.movesListByType
+            } else {
+                Log.e("Failed to retrieve moves by type. Error code: ${response.code()}", "Failed")
                 null
             }
         }
